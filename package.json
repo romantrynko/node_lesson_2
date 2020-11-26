@@ -1,0 +1,26 @@
+{
+  "name": "lesson-2",
+  "version": "1.0.0",
+  "description": "app",
+  "main": "App.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/express-handlebars": "3.1.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romantrynko/node_lesson_2.git"
+  },
+  "author": "Roman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/romantrynko/node_lesson_2/issues"
+  },
+  "homepage": "https://github.com/romantrynko/node_lesson_2#readme"
+}
