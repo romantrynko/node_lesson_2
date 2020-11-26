@@ -8,17 +8,33 @@
 </head>
 
 <body>
-    {{#if isOk}}
+    {{!-- {{#if isOk}}
     <div>{{userName}} hello!</div>
     {{else}}
     <div>{{userName}} bye!</div>
-    {{/if}}
+    {{/if}} --}}
+    <header>
+        <h2>Main page</h2>
 
-    <form action="/login" method="post">
-        <input type="text" name="name">
-        <input type="text" name="age">
-        <input type="submit" value="ok">
+    </header>
+    <h3>Please sign up</h3>
+    <form action="/signup" method="post">
+        <input type="text" name="name" placeholder="Enter name">
+        <input type="text" name="age" placeholder="Enter age">
+        <br>
+        <input type="email" name="email" placeholder="Enter email">
+        <br>
+        <input type="password" name="password" placeholder="Enter password">
+        <hr>
+        <input type="submit" value="Submit">
     </form>
+    <hr>
+    <form action="/login">
+        <h2>or login</h2>
+        <button type="submit"> Login
+        </button>
+    </form>
+        <hr>
 </body>
 
 </html>

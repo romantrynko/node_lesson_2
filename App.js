@@ -1,7 +1,7 @@
 let usersArray = [
-    { name: 'Ivan', age: 25 },
-    { name: 'Vova', age: 35 },
-    { name: 'Roma', age: 20 },
+    { name: 'Ivan', age: 25, email: "ivan@net" },
+    { name: 'Vova', age: 35, email: "vova@net" },
+    { name: 'Roma', age: 20, email: "roma@net" },
 ]
 
 
@@ -28,49 +28,37 @@ app.get('/users', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.render('main', { isOk: false, userName: 'Ivan' })
+    res.render('main');
 })
 
+app.get('/login', (req,res) => {
+    res.render('login');
+})
 
-usersArray.find(value => {
-    app.post('/login', (req, res) => {
-        const user = req.body;
-        if (value.name !== user.name) {
-        console.log(req.body);
-            usersArray.push( user );
-            res.redirect('/users');
+app.post('/login', (req, res) => {
+    const { name, age, email } = req.body;
+    usersArray.find(el => {
+        if(el.email !== email) {
+            res.redirect('users');
         }
+        // res.redirect('users')
         res.redirect('errorPage');
-
     })
 })
 
-
-// app.get('/', (req,res) => {
-//     // console.log(req);
-
-//     res.send('Testing...');
-// })
-
-// app.get('/users', (req,res) => {
-//     res.write('Roman');
-//     res.write('123 ');
-//     res.write('123 ');
-//     res.write('123 ');
-//     res.end();
-// })
-
-// app.get('/logs', (req,res) => {
-//     res.json({name: "Roman", age: 32})
-// })
-
-// app.post('/logs', (req,res) => {
-
-//     console.log(req.body);
+app.post('/signup', (req, res) => {
+    const { name, age, email } = req.body;
+    usersArray.find(el => {
+        if (el.email === email) {
+            res.redirect('/login')
+        }
+        res.redirect('login');
+        usersArray.push({ name, age, email });
+    })
+    res.redirect('/users');
 
 
-//     res.json(req.body);
-// })
+})
 
 app.listen(3000, () => {
     console.log('App listens on port: 3000');

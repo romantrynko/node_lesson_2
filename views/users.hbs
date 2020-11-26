@@ -8,11 +8,16 @@
 </head>
 
 <body>
-    Hello world!
-    <br>
+    <h2>Welcome!</h2>
+    <hr>
     {{#each users}}
-    <div>{{this.name}}</div>
-    <div style="background-color: aqua;">{{this.age}}</div>
+    <div>
+        <h3>
+            {{this.name}}, age: {{this.age}} <br>
+            email: {{this.email}}
+        </h3>
+    </div>
+    <hr>
     {{/each}}
 </body>
 

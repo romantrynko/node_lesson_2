@@ -8,9 +8,17 @@
 </head>
 
 <body>
-    {{#each users}}
-    <div>{{this.name}} - age: {{this.age}}</div>
-    {{/each}}
+    <header>
+        <h2>User already exists, please enter your email and password</h2>
+    </header>
+    <form action="/login" method="post">
+        <input type="email" name="email" placeholder="Enter email">
+        <br>
+        <input type="password" name="password" placeholder="Enter password">
+        <hr>
+        <input type="submit" value="Submit">
+        <hr>
+    </form>
 </body>
 
 </html>
