@@ -8,17 +8,26 @@
 </head>
 
 <body>
+    <br>
     <h2>Welcome!</h2>
+    <form action="/">
+        <input type="submit" value="Home">
+    </form>
     <hr>
-    {{#each users}}
-    <div>
-        <h3>
-            {{this.name}}, age: {{this.age}} <br>
-            email: {{this.email}}
-        </h3>
-    </div>
-    <hr>
-    {{/each}}
+    <form action="/logout" method="get">
+        <input type="submit" value="Logout">
+    </form>
+        <hr>
+        {{#each users}}
+        <div>
+            <h3>
+                {{this.name}}, age: {{this.age}} <br>
+                email: {{this.email}}
+            </h3>
+
+        </div>
+        <hr>
+        {{/each}}
 </body>
 
 </html>

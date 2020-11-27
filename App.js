@@ -1,9 +1,4 @@
-let usersArray = [
-    { name: 'Ivan', age: 25, email: "ivan@net" },
-    { name: 'Vova', age: 35, email: "vova@net" },
-    { name: 'Roma', age: 20, email: "roma@net" },
-]
-
+const { users } = require('./users');
 
 const express = require('express');
 const exprsHbs = require('express-handlebars');
@@ -23,42 +18,50 @@ app.engine('.hbs', exprsHbs({
 
 app.set('views', path.join(process.cwd(), 'views'));
 
-app.get('/users', (req, res) => {
-    res.render('users', { users: usersArray });
-})
+
 
 app.get('/', (req, res) => {
     res.render('main');
-})
+});
 
-app.get('/login', (req,res) => {
+app.get('/users', (req, res) => {
+    res.render('users', { users: users });
+});
+
+app.get('/login', (req, res) => {
     res.render('login');
-})
+});
+
+app.get('/error', (req, res) => {
+    res.render('errorPage');
+});
+
+app.post('/register', (req, res) => {
+    const { name, age, email } = req.body;
+    users.map(el => {
+        if (el.email !== email) {
+            users.push(name, age, email);
+            res.redirect('/users');
+            brake;
+        }
+        res.redirect('/login');
+    })
+});
 
 app.post('/login', (req, res) => {
-    const { name, age, email } = req.body;
-    usersArray.find(el => {
-        if(el.email !== email) {
-            res.redirect('users');
+    const { email } = req.body;
+    users.find(el => {
+        if (el.email.toLocaleLowerCase() === email.toLocaleLowerCase()) {
+            res.redirect('/users');
         }
-        // res.redirect('users')
-        res.redirect('errorPage');
+        res.redirect('/error');
     })
-})
+});
 
-app.post('/signup', (req, res) => {
-    const { name, age, email } = req.body;
-    usersArray.find(el => {
-        if (el.email === email) {
-            res.redirect('/login')
-        }
-        res.redirect('login');
-        usersArray.push({ name, age, email });
-    })
-    res.redirect('/users');
-
-
-})
+app.get('/logout', (req, res) => {
+    users.pop();
+    res.redirect('/')
+});
 
 app.listen(3000, () => {
     console.log('App listens on port: 3000');

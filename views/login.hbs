@@ -9,12 +9,16 @@
 
 <body>
     <header>
-        <h2>User already exists, please enter your email and password</h2>
+        <form action="/">
+            <input type="submit" value="Home">
+        </form>
+        <hr>
+        <h3>Please sign-in</h3>
     </header>
     <form action="/login" method="post">
-        <input type="email" name="email" placeholder="Enter email">
+        <input type="text" name="email" placeholder="Enter email" required="true">
         <br>
-        <input type="password" name="password" placeholder="Enter password">
+        <input type="password" name="password" placeholder="Enter password" required="true">
         <hr>
         <input type="submit" value="Submit">
         <hr>
