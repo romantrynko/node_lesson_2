@@ -8,26 +8,19 @@
 </head>
 
 <body>
-    <header>
+    <div>
         <h2>Main page</h2>
         <hr>
-    </header>
-    <h3>Please register</h3>
-    <hr>
-    <form action="/register" method="post">
-        <input type="text" name="name" placeholder="Enter name">
-        <input type="number" name="age" placeholder="Enter age">
-        <br>
-        <input type="text" name="email" placeholder="Enter email">
-        <br>
-        <input type="password" name="password" placeholder="Create Password">
-        <br>
-        <input type="submit" value="Submit">
+    </div>
+    
+    <form action="/login" method="GET">
+        <button type="submit"> Login
+        </button>
     </form>
     <hr>
-    <form action="/login">
+    <form action="/register" method="GET">
         <b>or </b>
-        <button type="submit"> Login
+        <button type="submit"> Register
         </button>
     </form>
     <hr>
