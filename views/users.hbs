@@ -9,19 +9,19 @@
 
 <body>
     <br>
-    <h2>Welcome!</h2>
-    <form action="/" method="GET"
+    <h2 >Welcome! {{userName}}</h2>
+    <form action="/" method="GET">
         <input type="submit" value="Home">
     </form>
     <hr>
-    <form action="/logout" method="GET">
+    <form action="/logout" method="POST">
         <input type="submit" value="Logout">
     </form>
         <hr>
         {{#each users}}
         <div>
             <h3>
-                {{this.name}}, age: {{this.age}} <br>
+                {{this.name}} <br>
                 email: {{this.email}}
             </h3>
 

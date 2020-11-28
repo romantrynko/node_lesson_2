@@ -19,6 +19,8 @@ app.set('views', path.join(process.cwd(), 'views'));
 
 
 const usersPath = path.join(process.cwd(), 'users.json');
+let isLoggedIn = false;
+let loggedUser = '';
 
 app.get('/', (req, res) => {
     res.render('main');
@@ -33,64 +35,70 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/users', (req, res) => {
-    fs.readFile(usersPath, (err, data) => {
-        const users = JSON.parse(data.toString())
-        res.render('users', { users: users });
-    })
+    if (!isLoggedIn) {
+        res.redirect('/register');
+    } else {
+        fs.readFile(usersPath, (err, data) => {
+            const users = JSON.parse(data.toString())
+            res.render('users', { users: users});
+        })
+    }
 });
 
 app.get('/error', (req, res) => {
     res.render('errorPage');
 });
 
-
 app.post('/register', (req, res) => {
     const { email, password } = req.body;
 
     fs.readFile(usersPath, (err, data) => {
-        if (err) throw err;
-
         const users = JSON.parse(data.toString());
-        const registeredUser = users.find(user => {
-            user.email === email && user.password === password;
-        });
+        const registeredUser = users.find(user => user.email === email && user.password === password);
 
         if (!registeredUser) {
             users.push(req.body);
-            fs.writeFile(usersPath, JSON.stringify(users));
-            res.redirect('/login');
+
+            fs.writeFile(usersPath, JSON.stringify(users), (err) => {
+                console.log(err);
+            });
+
+            isLoggedIn = true;
+            res.redirect('/users');
+
+        } else {
+            res.redirect('/error');
         }
-        res.redirect('/login');
-
-
     });
 
 
 });
 
 app.post('/login', (req, res) => {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     fs.readFile(usersPath, (err, data) => {
         if (err) throw err;
 
         const users = JSON.parse(data.toString());
-        const emailTrue = users.find(user => (user.email === email && user.password === password));
+        const emailTrue = users.find(user => user.email === email && user.password === password);
         if (!emailTrue) {
             res.redirect('/error');
+        } else {
+            isLoggedIn = true;
+            loggedUser = name;
+            res.redirect('/users');
         }
-        res.redirect('/users');
     })
-
 
 });
 
-app.get('/logout', (req, res) => {
+app.post('/logout', (req, res) => {
     fs.readFile(usersPath, (err, data) => {
         const users = JSON.parse(data.toString())
-        users.pop();
     });
-    res.render('main');
+    isLoggedIn = false;
+    res.redirect('/');
 });
 
 app.listen(3000, () => {
