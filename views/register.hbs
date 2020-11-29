@@ -8,23 +8,67 @@
 </head>
 
 <body>
-    <div>
-        <form action="/" method="GET">
-            <input type="submit" value="Home">
-        </form>
-        <hr>
-        <h3>Please register</h3>
+    <div class="center">
+        <div class="text">Please register</div>
     </div>
 
-    <form action="/register" method="POST">
-        <input type="text" name="name" placeholder="Enter name">
+    <form class="center" action="/register" method="POST">
+        <input class="input center" type="text" name="name" placeholder="Enter name">
         <br>
-        <input type="text" name="email" placeholder="Enter email">
+        <input class="input center" type="text" name="email" placeholder="Enter email">
         <br>
-        <input type="password" name="password" placeholder="Create Password">
+        <input class="input center" type="password" name="password" placeholder="Create Password">
         <br>
-        <input type="submit" value="Submit">
+        <input class="button" type="submit" value="Submit">
+    </form>
+    <hr>
+    <form class="center" action="/" method="GET">
+        <input class="button" type="submit" value="Home">
     </form>
 </body>
+
+<style>
+    * {
+        font-family: sans-serif;
+    }
+
+    .button {
+        color: white;
+        background-color: rgb(139, 139, 160);
+        width: 150px;
+        height: 50px;
+        border: 0px solid black;
+        border-radius: 16px;
+        font-size: 18px;
+        margin: 15px;
+    }
+
+    .text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: rgb(190, 135, 53);
+        height: 50px;
+        margin: 15px;
+        padding: 10px;
+        border-radius: 16px;
+        font-size: 20px;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .input {
+        width: 200px;
+        height: 30px;
+        border: 1px solid black;
+        border-radius: 5px;
+        font-size: 15px;
+        margin: 5px;
+        background-color: rgb(245, 245, 245);
+    }
+</style>
 
 </html>

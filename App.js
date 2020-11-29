@@ -40,7 +40,7 @@ app.get('/users', (req, res) => {
     } else {
         fs.readFile(usersPath, (err, data) => {
             const users = JSON.parse(data.toString())
-            res.render('users', { users: users});
+            res.render('users', { users: users });
         })
     }
 });
@@ -89,7 +89,7 @@ app.post('/login', (req, res) => {
             loggedUser = name;
             res.redirect('/users');
         }
-    })
+    });
 
 });
 

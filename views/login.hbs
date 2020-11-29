@@ -8,21 +8,66 @@
 </head>
 
 <body>
-    <div>
-        <form action="/">
-            <input type="submit" value="Home">
-        </form>
-        <hr>
-        <h3>Please log-in</h3>
+    <div class="center">
+
+        <div class="text">Please log-in</div>
     </div>
-    <form action="/login" method="POST">
-        <input type="text" name="email" placeholder="Enter email" required="true">
+    <form class="center" action="/login" method="POST">
+        <input class="input center" type="text" name="email" placeholder="Enter email" required="true">
         <br>
-        <input type="password" name="password" placeholder="Enter password" required="true">
-        <hr>
-        <input type="submit" value="Submit">
-        <hr>
+        <input class="input center" type="password" name="password" placeholder="Enter password" required="true">
+        <br>
+        <input class="button" type="submit" value="Submit">
+    </form>
+    <hr>
+    <form class="center" action="/">
+        <input class="button" type="submit" value="Home">
     </form>
 </body>
+
+<style>
+    * {
+        font-family: sans-serif;
+    }
+
+    .button {
+        color: white;
+        background-color: rgb(139, 139, 160);
+        width: 150px;
+        height: 50px;
+        border: 0px solid black;
+        border-radius: 16px;
+        font-size: 18px;
+        margin: 15px;
+
+    }
+
+    .text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: rgb(141, 205, 216);
+        height: 50px;
+        margin: 15px;
+        padding: 10px;
+        border-radius: 16px;
+        font-size: 20px;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .input {
+        width: 200px;
+        height: 30px;
+        border: 1px solid black;
+        border-radius: 5px;
+        font-size: 15px;
+        margin: 5px;
+        background-color: rgb(245, 245, 245);
+    }
+</style>
 
 </html>

@@ -8,26 +8,97 @@
 </head>
 
 <body>
-    <br>
-    <h2 >Welcome! {{userName}}</h2>
-    <form action="/" method="GET">
-        <input type="submit" value="Home">
-    </form>
-    <hr>
-    <form action="/logout" method="POST">
-        <input type="submit" value="Logout">
-    </form>
-        <hr>
-        {{#each users}}
-        <div>
-            <h3>
-                {{this.name}} <br>
-                email: {{this.email}}
-            </h3>
+    <div>
+        <div class="text center">Welcome! {{userName}}</div>
 
+        <div class="flex-row">
+            <form action="/" method="GET">
+                <input class="button" type="submit" value="Home">
+            </form>
+            <form action="/logout" method="POST">
+                <input class="button" style="background-color: red" type="submit" value="Logout">
+            </form>
         </div>
-        <hr>
+    </div>
+    <div>
+        {{#each users}}
+        <div class="user">
+            <div>
+                <b>
+                {{this.name}}, 
+                </b>
+                email: {{this.email}}
+            </div>
+        </div>
         {{/each}}
+
+    </div>
 </body>
+
+<style>
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    * {
+        font-family: sans-serif;
+    }
+
+    .button {
+        color: white;
+        background-color: rgb(139, 139, 160);
+        width: 150px;
+        height: 50px;
+        border: 0px solid black;
+        border-radius: 16px;
+        font-size: 18px;
+        margin: 15px;
+
+    }
+
+    .text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: rgb(141, 205, 216);
+        height: 50px;
+        margin: 15px;
+        padding: 10px;
+        border-radius: 16px;
+        font-size: 20px;
+    }
+
+    .user {
+        display: flex;
+        
+        align-items: center;
+        color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
+        height: 50px;
+        margin: 15px;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 16px;
+        font-size: 20px;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .input {
+        width: 200px;
+        height: 30px;
+        border: 1px solid black;
+        border-radius: 5px;
+        font-size: 15px;
+        margin: 5px;
+        background-color: rgb(245, 245, 245);
+    }
+</style>
+
+</style>
 
 </html>
