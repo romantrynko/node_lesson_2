@@ -68,7 +68,10 @@ module.exports = {
         'no-labels': 'error',
         'no-lone-blocks': 'error',
         'no-loop-func': 'error',
-        'linebreak-style': 0,
+        'linebreak-style': [
+            2,
+            'windows'
+        ],
         'max-len': [
             'error',
             {
