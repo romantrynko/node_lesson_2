@@ -63,7 +63,7 @@ app.post('/register', (req, res) => {
 
         if (registeredUser) {
             res.redirect('/error');
-            errorMessage = 'user allready exists';
+            errorMessage = 'User allready exists';
             return;
         }
         isLoggedIn = true;
@@ -86,6 +86,7 @@ app.post('/login', (req, res) => {
         const emailTrue = users.find(user => user.email === email && user.password === password);
 
         if (!emailTrue) {
+            errorMessage = 'Check your email and password';
             res.redirect('/error');
             return;
         }
