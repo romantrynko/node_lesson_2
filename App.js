@@ -17,7 +17,6 @@ app.engine('.hbs', exprsHbs({
 
 app.set('views', path.join(process.cwd(), 'views'));
 
-
 const usersPath = path.join(process.cwd(), 'users.json');
 
 let isLoggedIn = false;
@@ -35,9 +34,9 @@ app.get('/users', (req, res) => {
     }
     fs.readFile(usersPath, (err, data) => {
         const users = JSON.parse(data.toString());
-        
+
         res.render('users', { users, loggedUser });
-    })
+    });
 });
 
 app.get('/login', (req, res) => {
@@ -48,9 +47,8 @@ app.get('/register', (req, res) => {
     res.render('register');
 });
 
-
 app.get('/error', (req, res) => {
-    res.render('errorPage', {errorMessage});
+    res.render('errorPage', { errorMessage });
 });
 
 app.post('/register', (req, res) => {
@@ -60,7 +58,7 @@ app.post('/register', (req, res) => {
         if (err) throw err;
 
         const users = JSON.parse(data.toString());
-        const registeredUser = users.find(user => user.email === email && user.password === password);
+        const registeredUser = users.find((user) => user.email === email && user.password === password);
 
         if (registeredUser) {
             res.redirect('/error');
@@ -71,8 +69,8 @@ app.post('/register', (req, res) => {
         isLoggedIn = true;
 
         users.push(req.body);
-        fs.writeFile(usersPath, JSON.stringify(users), (err) => {
-            console.log(err);
+        fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
+            console.log(err1);
         });
 
         res.redirect('/login');
@@ -86,7 +84,7 @@ app.post('/login', (req, res) => {
         if (err) throw err;
 
         const users = JSON.parse(data.toString());
-        const emailTrue = users.find(user => user.email === email && user.password === password);
+        const emailTrue = users.find((user) => user.email === email && user.password === password);
 
         if (!emailTrue) {
             errorMessage = 'Check your email and password';
@@ -108,5 +106,6 @@ app.post('/logout', (req, res) => {
 });
 
 app.listen(3000, () => {
+    // eslint-disable-next-line no-console
     console.log('App listens on port: 3000');
 });
