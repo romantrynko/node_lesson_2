@@ -35,6 +35,7 @@ app.get('/users', (req, res) => {
     }
     fs.readFile(usersPath, (err, data) => {
         const users = JSON.parse(data.toString());
+        
         res.render('users', { users, loggedUser });
     })
 });
@@ -63,6 +64,7 @@ app.post('/register', (req, res) => {
 
         if (registeredUser) {
             res.redirect('/error');
+
             errorMessage = 'User allready exists';
             return;
         }
@@ -72,6 +74,7 @@ app.post('/register', (req, res) => {
         fs.writeFile(usersPath, JSON.stringify(users), (err) => {
             console.log(err);
         });
+
         res.redirect('/login');
     });
 });
@@ -87,17 +90,20 @@ app.post('/login', (req, res) => {
 
         if (!emailTrue) {
             errorMessage = 'Check your email and password';
+
             res.redirect('/error');
             return;
         }
         isLoggedIn = true;
         loggedUser = emailTrue.name;
+
         res.redirect('/users');
     });
 });
 
 app.post('/logout', (req, res) => {
     isLoggedIn = false;
+
     res.redirect('/');
 });
 
