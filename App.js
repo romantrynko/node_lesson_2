@@ -1,7 +1,12 @@
 const express = require('express');
 const exprsHbs = require('express-handlebars');
-const fs = require('fs');
 const path = require('path');
+
+const userRouter = require('./routes/user.router');
+const loginRouter = require('./routes/login.router');
+const logoutRouter = require('./routes/logout.router');
+const registerRouter = require('./routes/register.router');
+const errorRouter = require('./routes/error.router');
 
 const app = express();
 
@@ -17,93 +22,19 @@ app.engine('.hbs', exprsHbs({
 
 app.set('views', path.join(process.cwd(), 'views'));
 
-const usersPath = path.join(process.cwd(), 'users.json');
-
-let isLoggedIn = false;
-let loggedUser = '';
-let errorMessage = '';
-
 app.get('/', (req, res) => {
     res.render('main');
 });
 
-app.get('/users', (req, res) => {
-    if (!isLoggedIn) {
-        res.redirect('/register');
-        return;
-    }
-    fs.readFile(usersPath, (err, data) => {
-        const users = JSON.parse(data.toString());
+app.use('/users', userRouter);
 
-        res.render('users', { users, loggedUser });
-    });
-});
+app.use('/login', loginRouter);
 
-app.get('/login', (req, res) => {
-    res.render('login');
-});
+app.use('/register', registerRouter);
 
-app.get('/register', (req, res) => {
-    res.render('register');
-});
+app.use('/error', errorRouter);
 
-app.get('/error', (req, res) => {
-    res.render('errorPage', { errorMessage });
-});
-
-app.post('/register', (req, res) => {
-    const { email, password } = req.body;
-
-    fs.readFile(usersPath, (err, data) => {
-        if (err) throw err;
-
-        const users = JSON.parse(data.toString());
-        const registeredUser = users.find((user) => user.email === email && user.password === password);
-
-        if (registeredUser) {
-            res.redirect('/error');
-
-            errorMessage = 'User allready exists';
-            return;
-        }
-        isLoggedIn = true;
-
-        users.push(req.body);
-        fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
-            console.log(err1);
-        });
-
-        res.redirect('/login');
-    });
-});
-
-app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-
-    fs.readFile(usersPath, (err, data) => {
-        if (err) throw err;
-
-        const users = JSON.parse(data.toString());
-        const emailTrue = users.find((user) => user.email === email && user.password === password);
-
-        if (!emailTrue) {
-            errorMessage = 'Check your email and password';
-
-            res.redirect('/error');
-            return;
-        }
-        isLoggedIn = true;
-        loggedUser = emailTrue.name;
-
-        res.redirect('/users');
-    });
-});
-
-app.post('/logout', (req, res) => {
-    isLoggedIn = false;
-
-    res.redirect('/');
-});
+app.use('/logout', logoutRouter);
 
 app.listen(3000, () => {
     // eslint-disable-next-line no-console
