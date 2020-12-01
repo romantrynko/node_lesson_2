@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 const fs = require('fs');
 
-let { isLoggedIn, errorMessage } = require('../consts');
-const usersPath = require('../consts');
+const {
+    usersPath, isLoggedInPath, errorMessagePath
+} = require('../path');
 
 module.exports = {
     getRegister: (req, res) => {
@@ -18,12 +20,20 @@ module.exports = {
             const registeredUser = users.find((user) => user.email === email && user.password === password);
 
             if (registeredUser) {
-                res.redirect('/error');
+                fs.writeFile(errorMessagePath, JSON.stringify({
+                    errorMessage: 'User allready exists'
+                }), (err1) => {
+                    console.log(err1);
+                });
 
-                errorMessage = 'User allready exists';
+                res.redirect('/error');
                 return;
             }
-            isLoggedIn = true;
+            fs.writeFile(isLoggedInPath, JSON.stringify({
+                isLoggedIn: true
+            }), (err1) => {
+                console.log(err1);
+            });
 
             users.push(req.body);
             fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
@@ -35,6 +45,3 @@ module.exports = {
         });
     }
 };
-
-module.exports = isLoggedIn;
-module.exports = errorMessage;

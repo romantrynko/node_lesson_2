@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
 const fs = require('fs');
 
-let {
-    errorMessage, isLoggedIn, loggedUser
-} = require('../consts');
-const usersPath = require('../consts');
+const {
+    usersPath, isLoggedInPath, errorMessagePath, loggedUserPath
+} = require('../path');
 
 module.exports = {
     getLogin: (req, res) => {
@@ -13,26 +13,38 @@ module.exports = {
     postLogin: (req, res) => {
         const { email, password } = req.body;
 
+        console.log(usersPath);
+
         fs.readFile(usersPath, (err, data) => {
             if (err) throw err;
 
             const users = JSON.parse(data.toString());
-            const emailTrue = users.find((user) => user.email === email && user.password === password);
+            const dataTrue = users.find((user) => user.email === email && user.password === password);
 
-            if (!emailTrue) {
-                errorMessage = 'Check your email and password';
+            if (!dataTrue) {
+                fs.writeFile(errorMessagePath, JSON.stringify({
+                    errorMessage: 'Check your email and password'
+                }), (err1) => {
+                    console.log(err1);
+                });
 
                 res.redirect('/error');
                 return;
             }
-            isLoggedIn = true;
-            loggedUser = emailTrue.name;
+
+            fs.writeFile(isLoggedInPath, JSON.stringify({
+                isLoggedIn: true
+            }), (err1) => {
+                console.log(err1);
+            });
+
+            fs.writeFile(loggedUserPath, JSON.stringify({
+                loggedUser: dataTrue.name
+            }), (err1) => {
+                console.log(err1);
+            });
 
             res.redirect('/users');
         });
     }
 };
-
-module.exports = isLoggedIn;
-module.exports = loggedUser;
-module.exports = errorMessage;
