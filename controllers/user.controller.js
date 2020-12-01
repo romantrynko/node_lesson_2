@@ -26,7 +26,6 @@ module.exports = {
                     const loggedUser = JSON.parse(data2.toString());
 
                     res.render('users', { users, name: loggedUser.loggedUser });
-                    console.log(loggedUser);
                 });
             });
         });
