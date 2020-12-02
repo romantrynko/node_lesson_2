@@ -18,7 +18,6 @@ module.exports = {
 
             const users = JSON.parse(data.toString());
             const user = users.find((el) => el.email === email);
-            console.log(user);
 
             fs.writeFile(loggedUserPath, JSON.stringify({
                 loggedUser: user.name

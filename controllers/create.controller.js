@@ -37,7 +37,7 @@ module.exports = {
 
         fs.readFile(isLoggedInPath, (err, data) => {
             if (err) {
-                console.error(`Could not read from loggedUserPath ${err}`);
+                console.log(err);
             }
 
             isLoggedIn = JSON.parse(data.toString()).isLoggedIn;
@@ -61,18 +61,17 @@ module.exports = {
 
     deleteUser: (req, res) => {
         const { email } = req.body;
+        console.log(req.body);
 
         fs.readFile(usersPath, (err, data) => {
             if (err) throw err;
 
             const users = JSON.parse(data.toString());
-            users.filter((el) => {
-                if (el.email === email) {
-                    fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
-                        console.log(err1);
-                        res.render('users');
-                    });
-                }
+            const filteredUsers = users.filter((el) => el.email === email);
+
+            fs.writeFile(usersPath, JSON.stringify(filteredUsers), (err1) => {
+                console.log(err1);
+                res.redirect('/');
             });
         });
     }

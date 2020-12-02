@@ -11,4 +11,6 @@ createRouter.post('/', createMiddleware.checkUserPresent, createController.postC
 
 createRouter.get('/users', createController.getUsers);
 
+createRouter.delete('/', createController.deleteUser);
+
 module.exports = createRouter;
