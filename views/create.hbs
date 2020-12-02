@@ -9,18 +9,20 @@
 
 <body>
     <div class="center">
-
-        <div class="text">Please log-in</div>
+        <div class="text">Please register</div>
     </div>
-    <form class="center" action="/login" method="POST">
-        <input class="input center" type="text" name="email" placeholder="Enter email" required="true">
+
+    <form class="center" action="/create" method="POST">
+        <input class="input center" type="text" name="name" placeholder="Enter name">
         <br>
-        <input class="input center" type="password" name="password" placeholder="Enter password" required="true">
+        <input class="input center" type="text" name="email" placeholder="Enter email">
+        <br>
+        <input class="input center" type="password" name="password" placeholder="Create Password">
         <br>
         <input class="button" type="submit" value="Submit">
     </form>
     <hr>
-    <form class="center" action="/">
+    <form class="center" action="/" method="GET">
         <input class="button" type="submit" value="Home">
     </form>
 </body>
@@ -39,7 +41,6 @@
         border-radius: 16px;
         font-size: 18px;
         margin: 15px;
-
     }
 
     .text {
@@ -47,7 +48,7 @@
         justify-content: center;
         align-items: center;
         color: white;
-        background-color: rgb(141, 205, 216);
+        background-color: rgb(190, 135, 53);
         height: 50px;
         margin: 15px;
         padding: 10px;

@@ -2,28 +2,26 @@
 const fs = require('fs');
 
 const {
-    usersPath, isLoggedInPath, errorMessagePath, loggedUserPath
+    usersPath, isLoggedInPath, errorMessagePath
 } = require('../path');
 
 module.exports = {
-    getLogin: (req, res) => {
-        res.render('login');
+    getCreate: (req, res) => {
+        res.render('create');
     },
 
-    postLogin: (req, res) => {
+    postCreate: (req, res) => {
         const { email, password } = req.body;
-
-        console.log(usersPath);
 
         fs.readFile(usersPath, (err, data) => {
             if (err) throw err;
 
             const users = JSON.parse(data.toString());
-            const dataTrue = users.find((user) => user.email === email && user.password === password);
+            const createdUser = users.find((user) => user.email === email && user.password === password);
 
-            if (!dataTrue) {
+            if (createdUser) {
                 fs.writeFile(errorMessagePath, JSON.stringify({
-                    errorMessage: 'Check your email and password'
+                    errorMessage: 'User allready exists'
                 }), (err1) => {
                     console.log(err1);
                 });
@@ -31,20 +29,19 @@ module.exports = {
                 res.redirect('/error');
                 return;
             }
-
             fs.writeFile(isLoggedInPath, JSON.stringify({
                 isLoggedIn: true
             }), (err1) => {
                 console.log(err1);
             });
 
-            fs.writeFile(loggedUserPath, JSON.stringify({
-                loggedUser: dataTrue.name
-            }), (err1) => {
+            users.push(req.body);
+            fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
+                // eslint-disable-next-line no-console
                 console.log(err1);
             });
 
-            res.redirect('/users');
+            res.redirect('/auth');
         });
     }
 };

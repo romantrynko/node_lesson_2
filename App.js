@@ -3,9 +3,8 @@ const exprsHbs = require('express-handlebars');
 const path = require('path');
 
 const userRouter = require('./routes/user.router');
-const loginRouter = require('./routes/login.router');
-const logoutRouter = require('./routes/logout.router');
-const registerRouter = require('./routes/register.router');
+const authRouter = require('./routes/auth.router');
+const createRouter = require('./routes/create.router');
 const errorRouter = require('./routes/error.router');
 
 const app = express();
@@ -28,13 +27,11 @@ app.get('/', (req, res) => {
 
 app.use('/users', userRouter);
 
-app.use('/login', loginRouter);
+app.use('/auth', authRouter);
 
-app.use('/register', registerRouter);
+app.use('/create', createRouter);
 
 app.use('/error', errorRouter);
-
-app.use('/logout', logoutRouter);
 
 app.listen(3000, () => {
     // eslint-disable-next-line no-console

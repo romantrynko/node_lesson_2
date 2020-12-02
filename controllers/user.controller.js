@@ -15,7 +15,7 @@ module.exports = {
             isLoggedIn = JSON.parse(data.toString()).isLoggedIn;
 
             if (!isLoggedIn) {
-                res.redirect('/register');
+                res.redirect('/create');
                 return;
             }
 
