@@ -2,7 +2,6 @@ const express = require('express');
 const exprsHbs = require('express-handlebars');
 const path = require('path');
 
-const userRouter = require('./routes/user.router');
 const authRouter = require('./routes/auth.router');
 const createRouter = require('./routes/create.router');
 const errorRouter = require('./routes/error.router');
@@ -25,7 +24,7 @@ app.get('/', (req, res) => {
     res.render('main');
 });
 
-app.use('/users', userRouter);
+app.use('/', createRouter);
 
 app.use('/auth', authRouter);
 

@@ -7,4 +7,6 @@ createRouter.get('/', createController.getCreate);
 
 createRouter.post('/', createController.postCreate);
 
+createRouter.get('/users', createController.getUsers);
+
 module.exports = createRouter;

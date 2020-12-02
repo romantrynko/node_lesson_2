@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 const {
-    usersPath, isLoggedInPath, errorMessagePath
+    usersPath, isLoggedInPath, errorMessagePath, loggedUserPath
 } = require('../path');
 
 module.exports = {
@@ -42,6 +42,33 @@ module.exports = {
             });
 
             res.redirect('/auth');
+        });
+    },
+
+    getUsers: (req, res) => {
+        let isLoggedIn;
+
+        fs.readFile(isLoggedInPath, (err, data) => {
+            if (err) {
+                console.error(`Could not read from loggedUserPath ${err}`);
+            }
+
+            isLoggedIn = JSON.parse(data.toString()).isLoggedIn;
+
+            if (!isLoggedIn) {
+                res.redirect('/create');
+                return;
+            }
+
+            fs.readFile(usersPath, (err1, data1) => {
+                const users = JSON.parse(data1.toString());
+
+                fs.readFile(loggedUserPath, (err2, data2) => {
+                    const loggedUser = JSON.parse(data2.toString());
+
+                    res.render('users', { users, name: loggedUser.loggedUser });
+                });
+            });
         });
     }
 };
