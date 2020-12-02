@@ -2,9 +2,7 @@ const express = require('express');
 const exprsHbs = require('express-handlebars');
 const path = require('path');
 
-const authRouter = require('./routes/auth.router');
-const createRouter = require('./routes/create.router');
-const errorRouter = require('./routes/error.router');
+const { authRouter, createRouter, errorRouter } = require('./routes');
 
 const app = express();
 

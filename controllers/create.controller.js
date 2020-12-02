@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 const {
-    usersPath, isLoggedInPath, errorMessagePath, loggedUserPath
+    usersPath, isLoggedInPath, loggedUserPath
 } = require('../path');
 
 module.exports = {
@@ -11,24 +11,11 @@ module.exports = {
     },
 
     postCreate: (req, res) => {
-        const { email, password } = req.body;
-
         fs.readFile(usersPath, (err, data) => {
             if (err) throw err;
 
             const users = JSON.parse(data.toString());
-            const createdUser = users.find((user) => user.email === email && user.password === password);
 
-            if (createdUser) {
-                fs.writeFile(errorMessagePath, JSON.stringify({
-                    errorMessage: 'User allready exists'
-                }), (err1) => {
-                    console.log(err1);
-                });
-
-                res.redirect('/error');
-                return;
-            }
             fs.writeFile(isLoggedInPath, JSON.stringify({
                 isLoggedIn: true
             }), (err1) => {
@@ -40,7 +27,7 @@ module.exports = {
                 // eslint-disable-next-line no-console
                 console.log(err1);
             });
-
+            res.status(201);
             res.redirect('/auth');
         });
     },
@@ -68,6 +55,24 @@ module.exports = {
 
                     res.render('users', { users, name: loggedUser.loggedUser });
                 });
+            });
+        });
+    },
+
+    deleteUser: (req, res) => {
+        const { email } = req.body;
+
+        fs.readFile(usersPath, (err, data) => {
+            if (err) throw err;
+
+            const users = JSON.parse(data.toString());
+            users.filter((el) => {
+                if (el.email === email) {
+                    fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
+                        console.log(err1);
+                        res.render('users');
+                    });
+                }
             });
         });
     }

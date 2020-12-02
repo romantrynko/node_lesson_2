@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const errorController = require('../controllers/error.controller');
+const { errorController } = require('../controllers');
 
 const errorRouter = Router();
 
