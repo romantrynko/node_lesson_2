@@ -1,12 +1,47 @@
-// const fs = require('fs');
+const fs = require('fs');
+const { usersPath } = require('../path');
 
-// const { usersPath } = require('../path');
+module.exports = {
+    createUser: (user) => {
+        let users;
+        return new Promise((resolve, reject) => {
+            fs.readFile(usersPath, (err, data) => {
+                if (err) reject(err);
 
-// module.exports = {
-//     findUserByEmail: fs.readFile(usersPath, (err, data) => {
-//         if (err) throw err;
+                users = JSON.parse(data.toString());
 
-//         const users = JSON.parse(data.toString());
-//         (email) => users.find((el) => el.email === email);
-//     });
-// };
+                users.push(user);
+                fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
+                    if (err1) reject(err1);
+                    resolve(users);
+                });
+            });
+        });
+    },
+
+    getUsers: () => {
+        let users;
+        return new Promise((resolve, reject) => {
+            fs.readFile(usersPath, (err, data) => {
+                if (err) reject(err);
+
+                users = JSON.parse(data.toString());
+
+                resolve(users);
+            });
+        });
+    },
+
+    getUserByEmail: (email) => {
+        let users;
+        return new Promise((resolve, reject) => {
+            fs.readFile(usersPath, (err, data) => {
+                if (err) reject(err);
+
+                users = JSON.parse(data.toString());
+
+                resolve(users);
+            });
+        });
+    }
+};
