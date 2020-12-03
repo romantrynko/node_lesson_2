@@ -20,7 +20,7 @@ module.exports = {
                 return next();
             });
         } catch (e) {
-            res.status(400).json(e.message);
+            res.status(400).json('User doesnt exists');
         }
     }
 };

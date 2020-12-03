@@ -12,6 +12,6 @@ usersRouter.post('/', userExistMiddleware.checkUserIsPresent, usersController.cr
 
 usersRouter.get('/:email', userValidMiddleware.checkUserValidity, usersController.getUserByEmail);
 
-usersRouter.delete('/:email', userExistMiddleware.checkUserIsPresent, usersController.deleteUser);
+usersRouter.delete('/:email', usersController.deleteUser);
 
 module.exports = usersRouter;
