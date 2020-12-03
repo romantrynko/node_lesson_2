@@ -33,15 +33,14 @@ module.exports = {
     },
 
     getUserByEmail: (email) => {
-        let users;
         return new Promise((resolve, reject) => {
             fs.readFile(usersPath, (err, data) => {
                 if (err) reject(err);
 
-                users = JSON.parse(data.toString());
+                const users = JSON.parse(data.toString());
 
-                resolve(users);
+                resolve(user);
             });
-        });
+        })
     }
 };

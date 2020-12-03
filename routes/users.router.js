@@ -9,7 +9,7 @@ usersRouter.get('/', usersController.getUsers);
 
 usersRouter.post('/', userExistMiddleware.checkUserIsPresent, usersController.createUser);
 
-usersRouter.get('/:email', usersController.getUser);
+usersRouter.get('/:email', usersController.getUserByEmail);
 
 // usersRouter.delete('/:email', usersController.deleteUser);
 
