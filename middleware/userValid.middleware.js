@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 
-const { usersPath, errorMessagePath } = require('../path');
+const { usersPath } = require('../path');
 
 module.exports = {
     checkUserValidity: (req, res, next) => {
@@ -14,16 +14,11 @@ module.exports = {
                 const users = JSON.parse(data.toString());
                 const dataTrue = users.find((user) => user.email === email && user.password === password);
 
-                if (!dataTrue) {
-                    fs.writeFile(errorMessagePath, JSON.stringify({
-                        errorMessage: 'Check your email and password'
-                    }), (err1) => {
-                        console.log(err1);
-                    });
-                    res.render('errorPage');
+                if (dataTrue) {
+                    return next();
                 }
+                res.status(400).json('Invalid email or password');
             });
-            next();
         } catch (e) {
             res.status(400);
         }

@@ -32,15 +32,16 @@ module.exports = {
         });
     },
 
-    getUserByEmail: (email) => {
+    getUserByEmail: () => {
+        let users;
         return new Promise((resolve, reject) => {
             fs.readFile(usersPath, (err, data) => {
                 if (err) reject(err);
 
-                const users = JSON.parse(data.toString());
+                users = JSON.parse(data.toString());
 
-                resolve(user);
+                resolve(users);
             });
-        })
+        });
     }
 };

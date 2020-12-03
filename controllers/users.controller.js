@@ -23,14 +23,10 @@ module.exports = {
     },
 
     getUserByEmail: (req, res) => {
-        const { email } = req.params;
-
         try {
-            userService.getUserByEmail(email).then((users) => {
-                users.find(user => {
-                    user.email === email;
-                    res.status(201).json(user);
-                })
+            const { userId } = req.params;
+            userService.getUserByEmail(req.body).then((users) => {
+                res.status(200).json(users[userId]);
             });
         } catch (e) {
             res.status(400).json(e.message);

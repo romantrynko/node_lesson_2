@@ -3,13 +3,13 @@ const { Router } = require('express');
 const usersRouter = Router();
 
 const { usersController } = require('../controllers');
-const { userExistMiddleware } = require('../middleware');
+const { userExistMiddleware, userValidMiddleware } = require('../middleware');
 
-usersRouter.get('/', usersController.getUsers);
+usersRouter.get('/', userValidMiddleware.checkUserValidity, usersController.getUsers);
 
 usersRouter.post('/', userExistMiddleware.checkUserIsPresent, usersController.createUser);
 
-usersRouter.get('/:email', usersController.getUserByEmail);
+usersRouter.get('/:email', userExistMiddleware.checkUserIsPresent, usersController.getUserByEmail);
 
 // usersRouter.delete('/:email', usersController.deleteUser);
 
