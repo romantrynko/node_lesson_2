@@ -14,13 +14,13 @@ module.exports = {
                 const users = JSON.parse(data.toString());
                 const dataTrue = users.find((user) => user.email === email && user.password === password);
 
-                if (dataTrue) {
-                    return next();
+                if (!dataTrue) {
+                    res.status(400).json('Invalid email or password');
                 }
-                res.status(400).json('Invalid email or password');
+                return next();
             });
         } catch (e) {
-            res.status(400);
+            res.status(400).json(e.message);
         }
     }
 };

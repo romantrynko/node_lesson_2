@@ -15,7 +15,7 @@ module.exports = {
     getUsers: (req, res) => {
         try {
             userService.getUsers(req.body).then((users) => {
-                res.status(201).json(users);
+                res.status(200).json(users);
             });
         } catch (e) {
             res.status(400).json(e.message);
@@ -24,29 +24,23 @@ module.exports = {
 
     getUserByEmail: (req, res) => {
         try {
-            const { userId } = req.params;
-            userService.getUserByEmail(req.body).then((users) => {
-                res.status(200).json(users[userId]);
+            const { email } = req.params;
+            userService.getUserByEmail(email).then((user) => {
+                res.status(200).json(user);
+            });
+        } catch (e) {
+            res.status(400).json(e.message);
+        }
+    },
+
+    deleteUser: (req, res) => {
+        try {
+            const { email } = req.params;
+            userService.deleteUser(email).then((users) => {
+                res.status(200).json(users);
             });
         } catch (e) {
             res.status(400).json(e.message);
         }
     }
-
-    // deleteUser: (req, res) => {
-    //     const { email } = req.body;
-    //     console.log(req.body);
-
-    //     fs.readFile(usersPath, (err, data) => {
-    //         if (err) throw err;
-
-    //         const users = JSON.parse(data.toString());
-    //         const filteredUsers = users.filter((el) => el.email === email);
-
-    //         fs.writeFile(usersPath, JSON.stringify(filteredUsers), (err1) => {
-    //             console.log(err1);
-    //             res.redirect('/');
-    //         });
-    //     });
-    // }
 };

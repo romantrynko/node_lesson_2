@@ -15,9 +15,9 @@ module.exports = {
                 const existingUser = users.find((user) => user.email === email);
 
                 if (!existingUser) {
-                    return next();
+                    res.status(400).json('User already exists');
                 }
-                res.status(400).json('User already exists');
+                return next();
             });
         } catch (e) {
             res.status(400).json(e.message);

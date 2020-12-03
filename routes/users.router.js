@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const { Router } = require('express');
 
 const usersRouter = Router();
@@ -5,12 +6,12 @@ const usersRouter = Router();
 const { usersController } = require('../controllers');
 const { userExistMiddleware, userValidMiddleware } = require('../middleware');
 
-usersRouter.get('/', userValidMiddleware.checkUserValidity, usersController.getUsers);
+usersRouter.get('/', usersController.getUsers);
 
 usersRouter.post('/', userExistMiddleware.checkUserIsPresent, usersController.createUser);
 
-usersRouter.get('/:email', userExistMiddleware.checkUserIsPresent, usersController.getUserByEmail);
+usersRouter.get('/:email', userValidMiddleware.checkUserValidity, usersController.getUserByEmail);
 
-// usersRouter.delete('/:email', usersController.deleteUser);
+usersRouter.delete('/:email', userExistMiddleware.checkUserIsPresent, usersController.deleteUser);
 
 module.exports = usersRouter;

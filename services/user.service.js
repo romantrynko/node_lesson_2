@@ -13,6 +13,7 @@ module.exports = {
                 users.push(user);
                 fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
                     if (err1) reject(err1);
+
                     resolve(users);
                 });
             });
@@ -32,16 +33,29 @@ module.exports = {
         });
     },
 
-    getUserByEmail: () => {
-        let users;
-        return new Promise((resolve, reject) => {
-            fs.readFile(usersPath, (err, data) => {
-                if (err) reject(err);
+    getUserByEmail: (email) => new Promise((resolve, reject) => {
+        fs.readFile(usersPath, (err, data) => {
+            if (err) reject(err);
 
-                users = JSON.parse(data.toString());
+            const users = JSON.parse(data.toString());
+            const user = users.find((user1) => user1.email === email);
 
-                resolve(users);
+            resolve(user);
+        });
+    }),
+
+    deleteUser: (email) => new Promise((resolve, reject) => {
+        fs.readFile(usersPath, (err, data) => {
+            if (err) reject(err);
+
+            const users = JSON.parse(data.toString());
+            const filteredUsers = users.filter((user) => user.email !== email);
+
+            fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
+                if (err1) reject(err1);
+
+                resolve(filteredUsers);
             });
         });
-    }
+    })
 };
