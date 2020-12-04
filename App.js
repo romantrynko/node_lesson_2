@@ -11,7 +11,7 @@ app.use(express.static(path.join(process.cwd(), 'views')));
 
 app.use('/users', usersRouter);
 
-app.listen(3000, () => {
+app.listen(5000, () => {
     // eslint-disable-next-line no-console
-    console.log('App listens on port: 3000');
+    console.log('App listens on port: 5000');
 });

@@ -1,61 +1,74 @@
-const fs = require('fs');
-const { usersPath } = require('../path');
+// const fs = require('fs');
+const db = require('../dataBase');
 
 module.exports = {
-    createUser: (user) => {
-        let users;
-        return new Promise((resolve, reject) => {
-            fs.readFile(usersPath, (err, data) => {
-                if (err) reject(err);
 
-                users = JSON.parse(data.toString());
-
-                users.push(user);
-                fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
-                    if (err1) reject(err1);
-
-                    resolve(users);
-                });
-            });
-        });
+    findUsers: () => {
+        db.query('SELECT * FROM users');
     },
 
-    getUsers: () => {
-        let users;
-        return new Promise((resolve, reject) => {
-            fs.readFile(usersPath, (err, data) => {
-                if (err) reject(err);
-
-                users = JSON.parse(data.toString());
-
-                resolve(users);
-            });
-        });
+    insertUser: () => {
+        // dataBase.push(user);
     },
 
-    getUserByEmail: (email) => new Promise((resolve, reject) => {
-        fs.readFile(usersPath, (err, data) => {
-            if (err) reject(err);
+    findUserById: () => {
+        // dataBase[user_id]
+    }
 
-            const users = JSON.parse(data.toString());
-            const user = users.find((user1) => user1.email === email);
+    // createUser: (user) => {
+    //     let users;
+    //     return new Promise((resolve, reject) => {
+    //         fs.readFile(usersPath, (err, data) => {
+    //             if (err) reject(err);
 
-            resolve(user);
-        });
-    }),
+    //             users = JSON.parse(data.toString());
 
-    deleteUser: (email) => new Promise((resolve, reject) => {
-        fs.readFile(usersPath, (err, data) => {
-            if (err) reject(err);
+    //             users.push(user);
+    //             fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
+    //                 if (err1) reject(err1);
 
-            const users = JSON.parse(data.toString());
-            const filteredUsers = users.filter((user) => user.email !== email);
+    //                 resolve(users);
+    //             });
+    //         });
+    //     });
+    // },
 
-            fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
-                if (err1) reject(err1);
+    // getUsers: () => {
+    //     let users;
+    //     return new Promise((resolve, reject) => {
+    //         fs.readFile(usersPath, (err, data) => {
+    //             if (err) reject(err);
 
-                resolve(filteredUsers);
-            });
-        });
-    })
+    //             users = JSON.parse(data.toString());
+
+    //             resolve(users);
+    //         });
+    //     });
+    // },
+
+    // getUserByEmail: (email) => new Promise((resolve, reject) => {
+    //     fs.readFile(usersPath, (err, data) => {
+    //         if (err) reject(err);
+
+    //         const users = JSON.parse(data.toString());
+    //         const user = users.find((user1) => user1.email === email);
+
+    //         resolve(user);
+    //     });
+    // }),
+
+    // deleteUser: (email) => new Promise((resolve, reject) => {
+    //     fs.readFile(usersPath, (err, data) => {
+    //         if (err) reject(err);
+
+    //         const users = JSON.parse(data.toString());
+    //         const filteredUsers = users.filter((user) => user.email !== email);
+
+    //         fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
+    //             if (err1) reject(err1);
+
+    //             resolve(filteredUsers);
+    //         });
+    //     });
+    // })
 };
