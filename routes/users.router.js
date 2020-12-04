@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 const { Router } = require('express');
 
 const usersRouter = Router();
