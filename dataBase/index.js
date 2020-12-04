@@ -7,7 +7,7 @@ module.exports = (() => {
     let instance;
 
     const initConnection = () => {
-        const client = new Sequelize('usersdb', 'host', 'host', {
+        const client = new Sequelize('usersdb', 'root', 'root', {
             host: 'localhost',
             dialect: 'mysql'
         });
@@ -19,7 +19,8 @@ module.exports = (() => {
             fs.readdir(modelsPath, (err, files) => {
                 files.forEach((file) => {
                     const [model] = file.split('.');
-                    models[model] = (require(path.join(modelsPath, model)))(client, DataTypes);
+                    const modelFile = require(path.join(modelsPath, model));
+                    models[model] = modelFile(client, DataTypes);
                 });
             });
         };

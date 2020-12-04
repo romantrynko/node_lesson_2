@@ -1,9 +1,13 @@
 // const fs = require('fs');
-const db = require('../dataBase');
+const db = require('../dataBase').getInstance();
 
 module.exports = {
 
-    findUsers: () => db.query('SELECT * FROM users'),
+    findUsers: () => {
+        const UserModel = db.getModel('User');
+
+        return UserModel.findAll();
+    },
 
     insertUser: (user) => db.query(`INSERT INTO users (email) VALUES (${user.email})`), // dataBase.push(user);
 
