@@ -18,7 +18,7 @@ module.exports = {
 
             console.log(users);
 
-            res.json('xxx');
+            res.json(users);
             // userService.getUsers(req.body).then((users) => {
             //     res.status(200).json(users);
             // });

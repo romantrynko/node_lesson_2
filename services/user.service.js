@@ -3,13 +3,9 @@ const db = require('../dataBase');
 
 module.exports = {
 
-    findUsers: () => {
-        db.query('SELECT * FROM users');
-    },
+    findUsers: () => db.query('SELECT * FROM users'),
 
-    insertUser: () => {
-        // dataBase.push(user);
-    },
+    insertUser: (user) => db.query(`INSERT INTO users (email) VALUES (${user.email})`), // dataBase.push(user);
 
     findUserById: () => {
         // dataBase[user_id]
