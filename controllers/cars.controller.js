@@ -3,7 +3,7 @@ const { carsService } = require('../services');
 module.exports = {
     getCars: async (req, res) => {
         try {
-            const [cars] = await carsService.findCars();
+            const cars = await carsService.findCars();
 
             console.log(cars);
 

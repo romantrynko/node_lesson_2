@@ -7,6 +7,8 @@ const { usersController } = require('../controllers');
 
 usersRouter.get('/', usersController.getUsers);
 
+usersRouter.get('/:id', usersController.getUserById);
+
 // usersRouter.post('/', userExistMiddleware.checkUserIsPresent, usersController.createUser);
 
 // usersRouter.get('/:email', userValidMiddleware.checkUserValidity, usersController.getUserByEmail);

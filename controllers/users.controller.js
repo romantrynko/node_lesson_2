@@ -14,9 +14,15 @@ module.exports = {
 
     getUsers: async (req, res) => {
         try {
-            const [users] = await userService.findUsers();
+            const users = await userService.findUsers();
 
-            console.log(users);
+            // console.log(users);
+
+            // users.forEach((user) => {
+            //     console.log('====================================');
+            //     console.log(user.email);
+            //     console.log('====================================');
+            // });
 
             res.json(users);
             // userService.getUsers(req.body).then((users) => {
@@ -25,7 +31,18 @@ module.exports = {
         } catch (e) {
             res.status(400).json(e.message);
         }
-    }
+    },
+
+    getUserById: (req, res) => {
+        try {
+            const { id } = req.params;
+            userService.getUserById(id).then((user) => {
+                res.status(200).json(user);
+            });
+        } catch (e) {
+            res.status(400).json(e.message);
+        }
+    },
 
     // getUserByEmail: (req, res) => {
     //     try {

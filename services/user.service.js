@@ -11,8 +11,11 @@ module.exports = {
 
     insertUser: (user) => db.query(`INSERT INTO users (email) VALUES (${user.email})`), // dataBase.push(user);
 
-    findUserById: () => {
+    getUserById: (id) => {
         // dataBase[user_id]
+        const UserModel = db.getModel('User');
+
+        return UserModel.findByPk(id);
     }
 
     // createUser: (user) => {
