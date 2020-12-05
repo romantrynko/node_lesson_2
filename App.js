@@ -17,7 +17,7 @@ app.use('/users', usersRouter);
 
 app.use('/cars', carsRouter);
 
-app.listen(3000, () => {
+app.listen(4000, () => {
     // eslint-disable-next-line no-console
-    console.log('App listens on port: 3000');
+    console.log('App listens on port: 4000');
 });
