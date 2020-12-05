@@ -5,14 +5,18 @@ const usersRouter = Router();
 const { usersController } = require('../controllers');
 // const { userExistMiddleware, userValidMiddleware } = require('../middleware');
 
+usersRouter.post('/', usersController.createUser);
+
 usersRouter.get('/', usersController.getAllUsers);
 
 usersRouter.get('/:id', usersController.getUserById);
 
-usersRouter.post('/', usersController.createUser);
+usersRouter.put('/:id', usersController.updateUser);
 
-// usersRouter.get('/:filter', usersController.getFilteredUsers);
+// usersRouter.options('/:name', usersController.getFilteredUsers);
 
 usersRouter.delete('/:id', usersController.deleteUser);
+
+usersRouter.options('/:id', usersController.getUserWithCar);
 
 module.exports = usersRouter;

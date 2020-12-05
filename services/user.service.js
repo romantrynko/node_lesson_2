@@ -1,9 +1,6 @@
-// const fs = require('fs');
-const { Op } = require('sequelize');
 const db = require('../dataBase').getInstance();
 
 module.exports = {
-
     createUser: (user_id, user_name, user_email, user_password) => {
         const UserModel = db.getModel('User');
 
@@ -13,6 +10,15 @@ module.exports = {
             email: user_email,
             password: user_password
         });
+    },
+
+    updateUser: (user_id, user) => {
+        const UserModel = db.getModel('User');
+
+        return UserModel.update(
+            { ...user },
+            { where: { id: user_id } }
+        );
     },
 
     getAllUsers: () => {
@@ -27,25 +33,26 @@ module.exports = {
         return UserModel.findByPk(id);
     },
 
-    getFilteredUsers: (user_id, user_name, user_email) => {
+    getFilteredUsers: (user_name) => {
         const UserModel = db.getModel('User');
 
         return UserModel.findAll({
             where: {
-                [Op.or]: [
-                    { id: user_id },
-                    { name: user_name },
-                    { email: user_email }
-                ]
+                name: user_name
             }
         });
     },
 
-    // updateUser: (id, name, email) => {
-    //     const UserModel = db.getModel('User');
+    getUserWithCar: (user_id) => {
+        const UserModel = db.getModel('User');
+        const CarModel = db.getModel('Car');
 
-    //     return UserModel.update({})
-    // },
+        return CarModel.belongsTo(UserModel, {
+            where: {
+                id: user_id
+            }
+        });
+    },
 
     deleteUser: (user_id) => {
         const UserModel = db.getModel('User');

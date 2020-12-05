@@ -3,14 +3,11 @@ const { Router } = require('express');
 const carsRouter = Router();
 
 const { carsController } = require('../controllers');
-// const { userExistMiddleware, userValidMiddleware } = require('../middleware');
 
-carsRouter.get('/', carsController.getCars);
+carsRouter.post('/', carsController.createCar);
 
-// usersRouter.post('/', userExistMiddleware.checkUserIsPresent, usersController.createUser);
+carsRouter.get('/', carsController.getAllCars);
 
-// usersRouter.get('/:email', userValidMiddleware.checkUserValidity, usersController.getUserByEmail);
-
-// usersRouter.delete('/:email', usersController.deleteUser);
+carsRouter.get('/:id', carsController.getCarById);
 
 module.exports = carsRouter;
