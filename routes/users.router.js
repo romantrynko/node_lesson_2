@@ -9,10 +9,10 @@ usersRouter.get('/', usersController.getUsers);
 
 usersRouter.get('/:id', usersController.getUserById);
 
-// usersRouter.post('/', userExistMiddleware.checkUserIsPresent, usersController.createUser);
+usersRouter.post('/', usersController.createUser);
 
-// usersRouter.get('/:email', userValidMiddleware.checkUserValidity, usersController.getUserByEmail);
+// usersRouter.get('/:filter', usersController.getFilteredUsers);
 
-// usersRouter.delete('/:email', usersController.deleteUser);
+usersRouter.delete('/:id', usersController.deleteUser);
 
 module.exports = usersRouter;

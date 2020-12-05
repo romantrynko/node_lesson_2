@@ -1,7 +1,19 @@
 // const fs = require('fs');
+const { Op } = require('sequelize');
 const db = require('../dataBase').getInstance();
 
 module.exports = {
+
+    createUser: (user_id, user_name, user_email, user_password) => {
+        const UserModel = db.getModel('User');
+
+        return UserModel.create({
+            id: user_id,
+            name: user_name,
+            email: user_email,
+            password: user_password
+        });
+    },
 
     findUsers: () => {
         const UserModel = db.getModel('User');
@@ -9,69 +21,38 @@ module.exports = {
         return UserModel.findAll();
     },
 
-    insertUser: (user) => db.query(`INSERT INTO users (email) VALUES (${user.email})`), // dataBase.push(user);
-
     getUserById: (id) => {
-        // dataBase[user_id]
         const UserModel = db.getModel('User');
 
         return UserModel.findByPk(id);
+    },
+
+    getFilteredUsers: (user_id, user_name, user_email) => {
+        const UserModel = db.getModel('User');
+
+        return UserModel.findAll({
+            where: {
+                [Op.or]: [
+                    { id: user_id },
+                    { name: user_name },
+                    { email: user_email }
+                ]
+            }
+        });
+    },
+
+    // updateUser: (id, name, email) => {
+    //     const UserModel = db.getModel('User');
+
+    //     return UserModel.update({})
+    // },
+
+    deleteUser: (user_id) => {
+        const UserModel = db.getModel('User');
+        return UserModel.destroy({
+            where: {
+                id: user_id
+            }
+        });
     }
-
-    // createUser: (user) => {
-    //     let users;
-    //     return new Promise((resolve, reject) => {
-    //         fs.readFile(usersPath, (err, data) => {
-    //             if (err) reject(err);
-
-    //             users = JSON.parse(data.toString());
-
-    //             users.push(user);
-    //             fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
-    //                 if (err1) reject(err1);
-
-    //                 resolve(users);
-    //             });
-    //         });
-    //     });
-    // },
-
-    // getUsers: () => {
-    //     let users;
-    //     return new Promise((resolve, reject) => {
-    //         fs.readFile(usersPath, (err, data) => {
-    //             if (err) reject(err);
-
-    //             users = JSON.parse(data.toString());
-
-    //             resolve(users);
-    //         });
-    //     });
-    // },
-
-    // getUserByEmail: (email) => new Promise((resolve, reject) => {
-    //     fs.readFile(usersPath, (err, data) => {
-    //         if (err) reject(err);
-
-    //         const users = JSON.parse(data.toString());
-    //         const user = users.find((user1) => user1.email === email);
-
-    //         resolve(user);
-    //     });
-    // }),
-
-    // deleteUser: (email) => new Promise((resolve, reject) => {
-    //     fs.readFile(usersPath, (err, data) => {
-    //         if (err) reject(err);
-
-    //         const users = JSON.parse(data.toString());
-    //         const filteredUsers = users.filter((user) => user.email !== email);
-
-    //         fs.writeFile(usersPath, JSON.stringify(users), (err1) => {
-    //             if (err1) reject(err1);
-
-    //             resolve(filteredUsers);
-    //         });
-    //     });
-    // })
 };
