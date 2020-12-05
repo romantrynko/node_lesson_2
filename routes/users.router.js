@@ -5,7 +5,7 @@ const usersRouter = Router();
 const { usersController } = require('../controllers');
 // const { userExistMiddleware, userValidMiddleware } = require('../middleware');
 
-usersRouter.get('/', usersController.getUsers);
+usersRouter.get('/', usersController.getAllUsers);
 
 usersRouter.get('/:id', usersController.getUserById);
 

@@ -15,7 +15,7 @@ module.exports = {
         });
     },
 
-    findUsers: () => {
+    getAllUsers: () => {
         const UserModel = db.getModel('User');
 
         return UserModel.findAll();
