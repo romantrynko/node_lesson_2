@@ -28,13 +28,10 @@ module.exports = (client, DataTypes) => {
 
     const User = require('./User')(client, DataTypes);
 
-    Car.belongsTo(User, {
-        foreignKey: {
-            name: 'user_id',
-            allowNull: false,
-            onDelete: 'CASCADE'
-        }
-    });
+    Car.belongsTo(User,
+        { foreignKey: 'user_id' },
+        { allowNull: false },
+        { onDelete: 'CASCADE' });
 
     return Car;
 };

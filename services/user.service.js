@@ -50,5 +50,45 @@ module.exports = {
                 id: user_id
             }
         });
+    },
+
+    checkUserByEmail: (user_email) => {
+        const UserModel = db.getModel('User');
+
+        return UserModel.findOne({
+            where: {
+                email: user_email
+            }
+        });
+    },
+
+    checkUserByParamsId: (user_id) => {
+        const UserModel = db.getModel('User');
+
+        return UserModel.findOne({
+            where: {
+                id: user_id
+            }
+        });
+    },
+
+    checkUserByBodyId: (user_id) => {
+        const UserModel = db.getModel('User');
+
+        return UserModel.findOne({
+            where: {
+                id: user_id
+            }
+        });
+    },
+
+    checkUserByName: (user_name) => {
+        const UserModel = db.getModel('User');
+
+        return UserModel.findOne({
+            where: {
+                name: user_name
+            }
+        });
     }
 };

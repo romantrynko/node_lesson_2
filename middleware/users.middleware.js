@@ -1,23 +1,60 @@
-// const fs = require('fs');
+const userService = require('../services/user.service');
 
-// module.exports = {
-//     checkUserId: (req, res, next) => {
-//         try {
-//             const { id } = req.params;
-//             if (id < 1) {
-//                 throw new Error
-//             }
+module.exports = {
 
-//                 return next();
-//             });
-//         } catch (e) {
-//             res.status(400).json('User doesnt exists');
-//         }
-//     },
+    checkUserByEmail: (req, res, next) => {
+        try {
+            const { email } = req.body;
+            userService.checkUserByEmail(email).then((user) => {
+                if (user) {
+                    res.status(400).json('User with such email allready exists');
+                }
+                next();
+            });
+        } catch (e) {
+            res.status(400).json(e.message);
+        }
+    },
 
-//     checkUserInfo; (req, res, next) => {
-//         try {
-//             const { id, name, email, password } = req.
-//         }
-//     }
-// };
+    checkUserByParamsId: (req, res, next) => {
+        try {
+            const { id } = req.params;
+            userService.checkUserByParamsId(id).then((user) => {
+                if (!user) {
+                    res.status(400).json('User with such id doesnt exist');
+                }
+                next();
+            });
+        } catch (e) {
+            res.status(400).json(e.message);
+        }
+    },
+
+    checkUserByName: (req, res, next) => {
+        try {
+            const { name } = req.params;
+            userService.checkUserByName(name).then((user) => {
+                if (!user) {
+                    res.status(400).json('User name doesnt exist');
+                }
+                next();
+            });
+        } catch (e) {
+            res.status(400).json(e.message);
+        }
+    },
+
+    checkUserByBodyId: (req, res, next) => {
+        try {
+            const { id } = req.body;
+            userService.checkUserByBodyId(id).then((user) => {
+                if (user) {
+                    res.status(400).json('User with such id allready exist');
+                }
+                next();
+            });
+        } catch (e) {
+            res.status(400).json(e.message);
+        }
+    },
+};
