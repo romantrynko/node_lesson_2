@@ -61,21 +61,10 @@ module.exports = {
     getFilteredUsers: (req, res) => {
         try {
             const { name } = req.params;
-            userService.getFilteredUsers(name).then((users) => {
-                res.status(200).json(users);
-            });
-        } catch (e) {
-            res.status(400).json(e.message);
-        }
-    },
 
-    getUserWithCar: (req, res) => {
-        try {
-            const { id } = req.params;
-
-            userService.getUserWithCar(id)
-                .then((user) => {
-                    res.status(200).json(user);
+            userService.getFilteredUsers(name)
+                .then((users) => {
+                    res.status(200).json(users);
                 });
         } catch (e) {
             res.status(400).json(e.message);

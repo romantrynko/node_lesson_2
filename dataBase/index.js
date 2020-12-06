@@ -34,7 +34,6 @@ module.exports = (() => {
     return {
         getInstance: () => {
             if (!instance) {
-                // create connection
                 instance = initConnection();
             }
 

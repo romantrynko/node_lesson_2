@@ -43,17 +43,6 @@ module.exports = {
         });
     },
 
-    getUserWithCar: (user_id) => {
-        const UserModel = db.getModel('User');
-        const CarModel = db.getModel('Car');
-
-        return CarModel.belongsTo(UserModel, {
-            where: {
-                id: user_id
-            }
-        });
-    },
-
     deleteUser: (user_id) => {
         const UserModel = db.getModel('User');
         return UserModel.destroy({

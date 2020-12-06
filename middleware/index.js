@@ -1,4 +1,3 @@
 module.exports = {
-    userValidMiddleware: require('./userValid.middleware'),
-    userExistMiddleware: require('./userExist.middleware'),
+    usersMiddleware: require('./users.middleware')
 };

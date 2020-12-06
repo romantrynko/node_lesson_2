@@ -13,10 +13,8 @@ usersRouter.get('/:id', usersController.getUserById);
 
 usersRouter.put('/:id', usersController.updateUser);
 
-// usersRouter.options('/:name', usersController.getFilteredUsers);
+usersRouter.options('/:name', usersController.getFilteredUsers);
 
 usersRouter.delete('/:id', usersController.deleteUser);
-
-usersRouter.options('/:id', usersController.getUserWithCar);
 
 module.exports = usersRouter;
