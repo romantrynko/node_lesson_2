@@ -23,14 +23,25 @@ module.exports = {
 
     getAllUsers: () => {
         const UserModel = db.getModel('User');
+        const CarModel = db.getModel('Car');
 
-        return UserModel.findAll();
+        return UserModel.findAll({
+            include: {
+                model: CarModel
+            }
+        });
     },
 
-    getUserById: (id) => {
+    getUserById: (user_id) => {
         const UserModel = db.getModel('User');
+        const CarModel = db.getModel('Car');
 
-        return UserModel.findByPk(id);
+        return UserModel.findAll({
+            include: {
+                model: CarModel,
+                where: { id: user_id },
+            }
+        });
     },
 
     getFilteredUsers: (user_name) => {

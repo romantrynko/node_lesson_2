@@ -20,6 +20,7 @@ module.exports = (() => {
                 files.forEach((file) => {
                     const [model] = file.split('.');
                     const modelFile = require(path.join(modelsPath, model));
+
                     models[model] = modelFile(client, DataTypes);
                 });
             });

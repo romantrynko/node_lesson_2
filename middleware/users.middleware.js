@@ -21,7 +21,7 @@ module.exports = {
             const { id } = req.params;
             userService.checkUserByParamsId(id).then((user) => {
                 if (!user) {
-                    res.status(400).json('User with such id doesnt exist');
+                    res.status(400).json("User with such id doesn't exist");
                 }
                 next();
             });
