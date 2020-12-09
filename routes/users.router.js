@@ -1,19 +1,21 @@
 const { Router } = require('express');
 const { usersController } = require('../controllers');
-const { usersMiddleware } = require('../middleware');
+const { usersMiddleware, validationMiddleware } = require('../middleware');
 
 const usersRouter = Router();
 
-usersRouter.post('/', usersMiddleware.checkUserByEmail, usersMiddleware.checkUserByBodyId, usersController.createUser);
+usersRouter.use('/:user_id', validationMiddleware.isIdCorrect, usersMiddleware.checkUserById);
 
-usersRouter.get('/', usersController.getAllUsers);
+usersRouter.post('/', validationMiddleware.isUserCreateCorrect, usersController.createUser);
 
-usersRouter.get('/:id', usersMiddleware.checkUserByParamsId, usersController.getUserById);
+usersRouter.get('/', usersController.findAllUsers);
 
-usersRouter.put('/:id', usersMiddleware.checkUserByParamsId, usersController.updateUser);
+usersRouter.options('/:name', usersController.getFilteredUsers);
 
-usersRouter.options('/:name', usersMiddleware.checkUserByName, usersController.getFilteredUsers);
+usersRouter.get('/:user_id', usersController.findUserById);
 
-usersRouter.delete('/:id', usersMiddleware.checkUserByParamsId, usersController.deleteUser);
+usersRouter.put('/:user_id', validationMiddleware.isUserUpdateCorrect, usersController.updateUser);
+
+usersRouter.delete('/:user_id', usersController.deleteUser);
 
 module.exports = usersRouter;

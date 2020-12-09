@@ -2,20 +2,11 @@ const { userService } = require('../services');
 
 module.exports = {
 
-    createUser: (req, res) => {
+    createUser: async (req, res) => {
         try {
-            const {
-                id,
-                name,
-                email,
-                password
-            } = req.body;
+            await userService.insertUser(req.body);
 
-            userService.createUser(id, name, email, password)
-                .then(() => userService.getAllUsers())
-                .then((users) => {
-                    res.status(201).json(users);
-                });
+            res.sendStatus(201);
         } catch (e) {
             res.status(400).json(e.message);
         }
@@ -36,23 +27,22 @@ module.exports = {
         }
     },
 
-    getAllUsers: (req, res) => {
+    findAllUsers: async (req, res) => {
         try {
-            userService.getAllUsers()
-                .then((users) => res.status(201).json(users));
+            const { limit = 10, page = 1, ...where } = req.query;
+            const offset = limit * (page - 1);
+
+            const users = await userService.selectAllUsers(where, +limit, +offset) || [];
+
+            res.json(users);
         } catch (e) {
             res.status(400).json(e.message);
         }
     },
 
-    getUserById: (req, res) => {
+    findUserById: async (req, res) => {
         try {
-            const { id } = req.params;
-
-            userService.getUserById(id)
-                .then((user) => {
-                    res.status(200).json(user);
-                });
+            await res.json(req.user);
         } catch (e) {
             res.status(400).json(e.message);
         }
