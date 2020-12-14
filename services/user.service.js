@@ -7,12 +7,12 @@ module.exports = {
         return UserModel.create(user);
     },
 
-    updateUser: (user_id, user) => {
+    updateUser: (userId, user) => {
         const UserModel = db.getModel('User');
 
         return UserModel.update(
             { ...user },
-            { where: { id: user_id } }
+            { where: { id: userId } }
         );
     },
 
@@ -30,15 +30,11 @@ module.exports = {
         });
     },
 
-    selectUserById: (user_id) => {
+    selectUserById: (userId) => {
         const UserModel = db.getModel('User');
         const CarModel = db.getModel('Car');
 
-        return UserModel.findByPk(user_id, {
-            include: {
-                model: CarModel
-            }
-        });
+        return UserModel.findByPk(userId, { include: CarModel });
     },
 
     getFilteredUsers: (user_name) => {
@@ -51,11 +47,11 @@ module.exports = {
         });
     },
 
-    deleteUser: (user_id) => {
+    deleteUser: (userId) => {
         const UserModel = db.getModel('User');
         return UserModel.destroy({
             where: {
-                id: user_id
+                id: userId
             }
         });
     },
@@ -70,22 +66,22 @@ module.exports = {
         });
     },
 
-    checkUserByParamsId: (user_id) => {
+    checkUserByParamsId: (userId) => {
         const UserModel = db.getModel('User');
 
         return UserModel.findOne({
             where: {
-                id: user_id
+                id: userId
             }
         });
     },
 
-    checkUserByBodyId: (user_id) => {
+    checkUserByBodyId: (userId) => {
         const UserModel = db.getModel('User');
 
         return UserModel.findOne({
             where: {
-                id: user_id
+                id: userId
             }
         });
     },

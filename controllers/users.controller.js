@@ -14,10 +14,10 @@ module.exports = {
 
     updateUser: (req, res) => {
         try {
-            const { id } = req.params;
+            const { userId } = req.params;
             const user = req.body;
 
-            userService.updateUser(id, user)
+            userService.updateUser(userId, user)
                 .then(() => userService.getAllUsers())
                 .then((users) => {
                     res.status(201).json(users);
@@ -40,9 +40,9 @@ module.exports = {
         }
     },
 
-    findUserById: async (req, res) => {
+    findUserById: (req, res) => {
         try {
-            await res.json(req.user);
+            res.json(req.user);
         } catch (e) {
             res.status(400).json(e.message);
         }
@@ -63,9 +63,9 @@ module.exports = {
 
     deleteUser: (req, res) => {
         try {
-            const { id } = req.params;
+            const { userId } = req.params;
 
-            userService.deleteUser(id)
+            userService.deleteUser(userId)
                 .then(() => userService.getAllUsers())
                 .then((users) => {
                     res.status(200).json(users);

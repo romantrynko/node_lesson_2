@@ -1,9 +1,9 @@
 module.exports = {
     isIdCorrect: (req, res, next) => {
         try {
-            const { id } = req.params;
+            const { userId } = req.params;
 
-            if (!id || id < 0 || Number.isInteger(+id)) {
+            if (!userId || userId < 0 || Number.isInteger(+userId)) {
                 throw new Error('Not valid ID');
             }
 
