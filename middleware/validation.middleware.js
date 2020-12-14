@@ -1,15 +1,17 @@
+const { ErrorHandler, errors } = require('../error');
+
 module.exports = {
     isIdCorrect: (req, res, next) => {
         try {
             const { userId } = req.params;
 
             if (!userId || userId < 0 || Number.isInteger(+userId)) {
-                throw new Error('Not valid ID');
+                throw new ErrorHandler(errors.NOT_VALID_ID.message, errors.NOT_VALID_ID.code);
             }
 
             next();
         } catch (e) {
-            res.json(e.message);
+            next(e);
         }
     },
 
@@ -20,24 +22,24 @@ module.exports = {
             } = req.body;
 
             if (email && email.length < 5) {
-                throw new Error('Not valid email');
+                throw new ErrorHandler(errors.NOT_VALID_EMAIL.message, errors.NOT_VALID_EMAIL.code);
             }
 
             if (name && name.length < 3) {
-                throw new Error('Not valid name');
+                throw new ErrorHandler(errors.NOT_VALID_NAME.message, errors.NOT_VALID_NAME.code);
             }
 
             if (password && password.length < 5) {
-                throw new Error('Not valid password');
+                throw new ErrorHandler(errors.NOT_VALID_PASSWORD.message, errors.NOT_VALID_PASSWORD.code);
             }
 
             if (Object.values(other).length) {
-                throw new Error('Wrong fields');
+                throw new ErrorHandler(errors.WRONG_FIELDS.message, errors.WRONG_FIELDS.code);
             }
 
             next();
         } catch (e) {
-            res.json(e.message);
+            next(e);
         }
     },
 
@@ -48,24 +50,24 @@ module.exports = {
             } = req.body;
 
             if (!email || email.length < 5) {
-                throw new Error('Not valid email');
+                throw new ErrorHandler(errors.NOT_VALID_EMAIL.message, errors.NOT_VALID_EMAIL.code);
             }
 
             if (!name || name.length < 3) {
-                throw new Error('Not valid name');
+                throw new ErrorHandler(errors.NOT_VALID_NAME.message, errors.NOT_VALID_NAME.code);
             }
 
             if (!password || password.length < 5) {
-                throw new Error('Not valid password');
+                throw new ErrorHandler(errors.NOT_VALID_PASSWORD.message, errors.NOT_VALID_PASSWORD.code);
             }
 
             if (Object.values(other).length) {
-                throw new Error('Wrong fields');
+                throw new ErrorHandler(errors.WRONG_FIELDS.message, errors.WRONG_FIELDS.code);
             }
 
             next();
         } catch (e) {
-            res.json(e.message);
+            next(e);
         }
     }
 };

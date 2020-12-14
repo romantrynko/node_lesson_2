@@ -3,7 +3,6 @@
 /* eslint-disable import/newline-after-import */
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable lines-around-directive */
-'use strict';
 
 const fs = require('fs');
 const path = require('path');
