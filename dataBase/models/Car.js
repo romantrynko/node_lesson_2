@@ -3,17 +3,18 @@ module.exports = (client, DataTypes) => {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
+            allowNull: false
         },
         model: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        price: {
+        year: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        year: {
+        price: {
             type: DataTypes.INTEGER,
             allowNull: false
         },

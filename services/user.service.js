@@ -16,7 +16,7 @@ module.exports = {
         );
     },
 
-    selectAllUsers: (where = {}, limit = 10, offset = 0) => {
+    selectAllUsers: (where = {}, limit = 3, offset = 0) => {
         const UserModel = db.getModel('User');
         const CarModel = db.getModel('Car');
 

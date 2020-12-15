@@ -30,7 +30,7 @@ module.exports = {
 
     findAllUsers: async (req, res, next) => {
         try {
-            const { limit = 10, page = 1, ...where } = req.query;
+            const { limit = 3, page = 1, ...where } = req.query;
             const offset = limit * (page - 1);
 
             const users = await userService.selectAllUsers(where, +limit, +offset) || [];

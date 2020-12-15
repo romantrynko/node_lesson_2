@@ -14,6 +14,14 @@ module.exports = {
                 type: Sequelize.DataTypes.STRING,
                 allowNull: false,
             },
+            year: {
+                type: Sequelize.DataTypes.INTEGER,
+                allowNull: false
+            },
+            price: {
+                type: Sequelize.DataTypes.INTEGER,
+                allowNull: false
+            },
             user_id: {
                 type: Sequelize.DataTypes.INTEGER,
                 allowNull: false,
@@ -28,6 +36,6 @@ module.exports = {
 
     // eslint-disable-next-line no-unused-vars
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('car');
+        await queryInterface.dropTable('cars');
     }
 };
