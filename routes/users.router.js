@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const { usersController } = require('../controllers');
-const { usersMiddleware, validationMiddleware, userValidityMiddleware } = require('../middleware');
+const {
+    usersMiddleware, validationMiddleware, userValidityMiddleware, userUpdateMiddleware
+} = require('../middleware');
 
 const usersRouter = Router();
 
@@ -26,6 +28,7 @@ usersRouter.get(
 
 usersRouter.put(
     '/:userId',
+    userUpdateMiddleware,
     usersMiddleware.checkIsUserRegisteredById,
     validationMiddleware.isIdCorrect,
     validationMiddleware.isUserUpdateCorrect,
