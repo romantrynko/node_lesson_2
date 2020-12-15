@@ -5,7 +5,7 @@ module.exports = {
         try {
             const { userId } = req.params;
 
-            if (!userId || userId < 0 || Number.isInteger(+userId)) {
+            if (!userId || userId < 0 || !Number.isInteger(+userId)) {
                 throw new ErrorHandler(errors.NOT_VALID_ID.message, errors.NOT_VALID_ID.code);
             }
 

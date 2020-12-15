@@ -4,18 +4,38 @@ const { usersMiddleware, validationMiddleware } = require('../middleware');
 
 const usersRouter = Router();
 
-usersRouter.use('/:userId', validationMiddleware.isIdCorrect, usersMiddleware.checkIsUserRegisteredById);
+usersRouter.get(
+    '/',
+    usersController.findAllUsers
+);
 
-usersRouter.get('/', usersController.findAllUsers);
+usersRouter.post(
+    '/',
+    usersMiddleware.checkIsUserRegisteredByEmail,
+    validationMiddleware.isUserCreateCorrect,
+    usersController.createUser
+);
 
-usersRouter.post('/', validationMiddleware.isUserCreateCorrect, usersController.createUser);
+usersRouter.get(
+    '/:userId',
+    validationMiddleware.isIdCorrect,
+    usersMiddleware.checkIsUserRegisteredById,
+    usersController.findUserById
+);
 
-usersRouter.get('/:userId', usersController.findUserById);
+usersRouter.put(
+    '/:userId',
+    usersMiddleware.checkIsUserRegisteredById,
+    validationMiddleware.isIdCorrect,
+    validationMiddleware.isUserUpdateCorrect,
+    usersController.updateUser
+);
 
-usersRouter.options('/:name', usersController.getFilteredUsers);
-
-usersRouter.put('/:userId', validationMiddleware.isUserUpdateCorrect, usersController.updateUser);
-
-usersRouter.delete('/:userId', usersController.deleteUser);
+usersRouter.delete(
+    '/:userId',
+    validationMiddleware.isIdCorrect,
+    usersMiddleware.checkIsUserRegisteredById,
+    usersController.deleteUser
+);
 
 module.exports = usersRouter;

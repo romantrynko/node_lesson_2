@@ -2,7 +2,6 @@ const { userService } = require('../services');
 const { ErrorHandler, errors } = require('../error');
 
 module.exports = {
-
     checkIsUserRegisteredByEmail: async (req, res, next) => {
         try {
             const { email } = req.body;

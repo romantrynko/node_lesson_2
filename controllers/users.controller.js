@@ -13,16 +13,16 @@ module.exports = {
         }
     },
 
-    updateUser: (req, res, next) => {
+    updateUser: async (req, res, next) => {
         try {
             const { userId } = req.params;
             const user = req.body;
 
-            userService.updateUser(userId, user)
-                .then(() => userService.getAllUsers())
-                .then((users) => {
-                    res.status(errors.USER_CREATED.code).json(users);
-                });
+            await userService.updateUser(userId, user);
+
+            const updatedUser = await userService.selectUserById(userId);
+
+            res.status(errors.OK.code).json(updatedUser);
         } catch (e) {
             next(e);
         }
@@ -35,7 +35,7 @@ module.exports = {
 
             const users = await userService.selectAllUsers(where, +limit, +offset) || [];
 
-            res.json(users);
+            res.status(errors.OK.code).json(users);
         } catch (e) {
             next(e);
         }
@@ -49,28 +49,15 @@ module.exports = {
         }
     },
 
-    getFilteredUsers: (req, res, next) => {
-        try {
-            const { name } = req.params;
-
-            userService.getFilteredUsers(name)
-                .then((users) => {
-                    res.status(errors.OK.code).json(users);
-                });
-        } catch (e) {
-            next(e);
-        }
-    },
-
-    deleteUser: (req, res, next) => {
+    deleteUser: async (req, res, next) => {
         try {
             const { userId } = req.params;
 
-            userService.deleteUser(userId)
-                .then(() => userService.getAllUsers())
-                .then((users) => {
-                    res.status(errors.OK.code).json(users);
-                });
+            await userService.deleteUser(userId);
+
+            const users = await userService.selectAllUsers();
+
+            res.status(errors.OK.code).json(users);
         } catch (e) {
             next(e);
         }

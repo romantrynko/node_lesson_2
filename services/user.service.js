@@ -37,16 +37,6 @@ module.exports = {
         return UserModel.findByPk(userId, { include: CarModel });
     },
 
-    getFilteredUsers: (user_name) => {
-        const UserModel = db.getModel('User');
-
-        return UserModel.findAll({
-            where: {
-                name: user_name
-            }
-        });
-    },
-
     deleteUser: (userId) => {
         const UserModel = db.getModel('User');
         return UserModel.destroy({
