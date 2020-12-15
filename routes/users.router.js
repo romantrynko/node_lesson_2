@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { usersController } = require('../controllers');
-const { usersMiddleware, validationMiddleware } = require('../middleware');
+const { usersMiddleware, validationMiddleware, userValidityMiddleware } = require('../middleware');
 
 const usersRouter = Router();
 
@@ -11,6 +11,7 @@ usersRouter.get(
 
 usersRouter.post(
     '/',
+    userValidityMiddleware,
     usersMiddleware.checkIsUserRegisteredByEmail,
     validationMiddleware.isUserCreateCorrect,
     usersController.createUser

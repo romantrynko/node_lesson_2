@@ -3,6 +3,11 @@ const {
 } = require('../config/errorCodes');
 
 module.exports = {
+    NOT_VALID_BODY: {
+        message: 'Not valid body',
+        code: UNATHORIZED
+    },
+
     NOT_VALID_ID: {
         message: 'Not valid Id',
         code: BAD_REQUEST

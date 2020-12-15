@@ -26,7 +26,7 @@ app.use('*', (err, req, res, next) => {
         });
 });
 
-app.listen(4000, () => {
+app.listen(3000, () => {
     // eslint-disable-next-line no-console
-    console.log('App listens on port: 4000');
+    console.log('App listens on port: 3000');
 });
