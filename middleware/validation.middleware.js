@@ -22,7 +22,7 @@ module.exports = {
             } = req.body;
 
             if (email && email.length < 5) {
-                throw new ErrorHandler(errors.NOT_VALID_EMAIL.message, errors.NOT_VALID_EMAIL.code);
+                throw new ErrorHandler(errors.NOT_VALID_EMAIL_OR_PASSWORD.message, errors.NOT_VALID_EMAIL.code);
             }
 
             if (name && name.length < 3) {
@@ -30,7 +30,7 @@ module.exports = {
             }
 
             if (password && password.length < 5) {
-                throw new ErrorHandler(errors.NOT_VALID_PASSWORD.message, errors.NOT_VALID_PASSWORD.code);
+                throw new ErrorHandler(errors.NOT_VALID_EMAIL_OR_PASSWORD.message, errors.NOT_VALID_PASSWORD.code);
             }
 
             if (Object.values(other).length) {
@@ -50,7 +50,7 @@ module.exports = {
             } = req.body;
 
             if (!email || email.length < 5) {
-                throw new ErrorHandler(errors.NOT_VALID_EMAIL.message, errors.NOT_VALID_EMAIL.code);
+                throw new ErrorHandler(errors.NOT_VALID_EMAIL_OR_PASSWORD.message, errors.NOT_VALID_EMAIL.code);
             }
 
             if (!name || name.length < 3) {
@@ -58,7 +58,7 @@ module.exports = {
             }
 
             if (!password || password.length < 5) {
-                throw new ErrorHandler(errors.NOT_VALID_PASSWORD.message, errors.NOT_VALID_PASSWORD.code);
+                throw new ErrorHandler(errors.NOT_VALID_EMAIL_OR_PASSWORD.message, errors.NOT_VALID_PASSWORD.code);
             }
 
             if (Object.values(other).length) {

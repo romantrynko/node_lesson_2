@@ -13,19 +13,14 @@ module.exports = {
         code: BAD_REQUEST
     },
 
-    NOT_VALID_EMAIL: {
-        message: 'Not valid email',
+    NOT_VALID_EMAIL_OR_PASSWORD: {
+        message: 'Not valid email or password',
         code: UNATHORIZED
     },
 
     NOT_VALID_NAME: {
         message: 'Not valid name',
         code: BAD_REQUEST
-    },
-
-    NOT_VALID_PASSWORD: {
-        message: 'Not valid password',
-        code: UNATHORIZED
     },
 
     WRONG_FIELDS: {

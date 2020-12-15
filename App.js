@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 
-const { usersRouter, carsRouter } = require('./routes');
+const { usersRouter, carsRouter, authRouter } = require('./routes');
 
 const app = express();
 
@@ -16,6 +16,8 @@ app.use(express.static(path.join(process.cwd(), 'views')));
 app.use('/users', usersRouter);
 
 app.use('/cars', carsRouter);
+
+app.use('/auth', authRouter);
 
 // eslint-disable-next-line no-unused-vars
 app.use('*', (err, req, res, next) => {

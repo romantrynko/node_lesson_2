@@ -4,8 +4,10 @@
   "description": "app",
   "main": "App.js",
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/joi": "^14.3.4",
     "@types/sequelize": "^4.28.9",
+    "bcrypt": "^5.0.0",
     "eslint": "^7.14.0",
     "eslint-config-node": "^4.1.0",
     "express": "^4.17.1",

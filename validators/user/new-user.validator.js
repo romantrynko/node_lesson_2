@@ -1,6 +1,7 @@
 const Joi = require('joi');
 
 const { EMAIL, PASSWORD } = require('../../config/regex.enum');
+const { CURRENT_YEAR } = require('../../constants/constants');
 
 module.exports = Joi.object({
     name: Joi
@@ -16,5 +17,25 @@ module.exports = Joi.object({
     password: Joi
         .string()
         .regex(PASSWORD)
-        .required()
+        .required(),
+    Cars: Joi.array().items(
+        Joi.object({
+            model: Joi
+                .string()
+                .alphanum()
+                .min(2)
+                .max(20),
+            year: Joi
+                .number()
+                .integer()
+                .min(CURRENT_YEAR - 120)
+                .max(CURRENT_YEAR),
+            price: Joi
+                .number()
+                .integer(),
+            user_id: Joi
+                .number()
+                .integer()
+        })
+    )
 });
