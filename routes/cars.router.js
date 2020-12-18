@@ -7,12 +7,10 @@ carsRouter.post('/', carsController.createCar);
 
 carsRouter.get('/', carsController.getAllCars);
 
-carsRouter.get('/:id', carsController.getCarById);
+carsRouter.get('/:carId', carsController.getCarById);
 
-carsRouter.put('/:id', carsController.updateCar);
+carsRouter.put('/:carId', carsController.updateCar);
 
-carsRouter.options('/:model', carsController.getFilteredCars);
-
-carsRouter.delete('/:id', carsController.deleteCar);
+carsRouter.delete('/:carId', carsController.deleteCar);
 
 module.exports = carsRouter;

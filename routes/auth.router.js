@@ -1,14 +1,13 @@
 const { Router } = require('express');
 const { usersController } = require('../controllers');
-const { emailPassMiddleware } = require('../middleware');
-const { passHashMiddleware } = require('../middleware/auth-middleware/check-pass-hash.middleware');
+const { checkPassHashMid, emailPassMid } = require('../middleware/auth-middleware');
 
 const authRouter = Router();
 
 authRouter.post(
     '/',
-    emailPassMiddleware,
-    passHashMiddleware,
+    emailPassMid,
+    checkPassHashMid,
     usersController.findAllUsers
 );
 

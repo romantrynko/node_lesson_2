@@ -1,87 +1,66 @@
 const { carsService } = require('../services');
+const { errors } = require('../error');
 
 module.exports = {
-    createCar: (req, res) => {
+    createCar: async (req, res, next) => {
         try {
-            const {
-                id,
-                model,
-                price,
-                year,
-                user_id
-            } = req.body;
+            const { car } = req.body;
 
-            carsService.createCar(id, model, price, year, user_id)
-                .then(() => carsService.getAllCars())
-                .then((cars) => {
-                    res.status(201).json(cars);
-                });
+            await carsService.createCar(car);
+
+            res.status(errors.CAR_CREATED.code);
         } catch (e) {
-            res.status(400).json(e.message);
+            next(e);
         }
     },
 
-    updateCar: (req, res) => {
+    updateCar: async (req, res, next) => {
         try {
-            const { id } = req.params;
+            const { carId } = req.params;
             const car = req.body;
 
-            carsService.updateCar(id, car)
-                .then(() => carsService.getAllCars())
-                .then((cars) => {
-                    res.status(201).json(cars);
-                });
+            await carsService.updateCar(carId, car);
+
+            const updatedCar = await carsService.selectCarById(carId);
+
+            res.status(errors.OK.cose).json(updatedCar);
         } catch (e) {
-            res.status(400).json(e.message);
+            next(e);
         }
     },
 
-    getAllCars: (req, res) => {
+    findAllCars: async (req, res, next) => {
         try {
-            carsService.getAllCars()
-                .then((cars) => res.status(201).json(cars));
+            const { limit = 10, page = 1, ...where } = req.query;
+            const offset = limit * (page - 1);
+
+            const cars = await carsService.selectAllCars(where, +limit, +offset) || [];
+
+            res.status(errors.OK.code).json(cars);
         } catch (e) {
-            res.status(400).json(e.message);
+            next(e);
         }
     },
 
-    getCarById: (req, res) => {
+    findCarById: (req, res, next) => {
         try {
-            const { id } = req.params;
-
-            carsService.getCarById(id)
-                .then((car) => {
-                    res.status(200).json(car);
-                });
+            res.json(req.car);
         } catch (e) {
-            res.status(400).json(e.message);
+            next(e);
         }
     },
 
-    getFilteredCars: (req, res) => {
+    deleteCar: async (req, res, next) => {
         try {
-            const { model } = req.params;
+            const { carId } = req.params;
 
-            carsService.getFilteredCar(model)
-                .then((cars) => {
-                    res.status(200).json(cars);
-                });
+            await carsService.deleteCar(carId);
+
+            const cars = await carsService.selectAllCars();
+
+            res.status(errors.OK.code).json(cars);
         } catch (e) {
-            res.status(400).json(e.message);
-        }
-    },
-
-    deleteCar: (req, res) => {
-        try {
-            const { id } = req.params;
-
-            carsService.deleteCar(id)
-                .then(() => carsService.getAllCars())
-                .then((cars) => {
-                    res.status(200).json(cars);
-                });
-        } catch (e) {
-            res.status(400).json(e.message);
+            next(e);
         }
     }
 };

@@ -1,54 +1,42 @@
 const db = require('../dataBase').getInstance();
 
 module.exports = {
-    createCar: (car_id, car_model, car_price, car_year, car_userId) => {
+    insertCar: (car) => {
         const CarModel = db.getModel('Car');
 
-        return CarModel.create({
-            id: car_id,
-            model: car_model,
-            price: car_price,
-            year: car_year,
-            user_id: car_userId
-        });
+        return CarModel.create(car);
     },
 
-    updateCar: (car_id, car) => {
+    updateCar: (carId, car) => {
         const CarModel = db.getModel('Car');
 
         return CarModel.update(
             { ...car },
-            { where: { id: car_id } }
+            { where: { id: carId } }
         );
     },
 
-    getAllCars: () => {
-        const CarModel = db.getModel('Car');
-
-        return CarModel.findAll();
-    },
-
-    getCarById: (id) => {
-        const CarModel = db.getModel('Car');
-
-        return CarModel.findByPk(id);
-    },
-
-    getFilteredCar: (car_model) => {
+    selectAllCars: (where = {}, limit = 10, offset = 0) => {
         const CarModel = db.getModel('Car');
 
         return CarModel.findAll({
-            where: {
-                model: car_model
-            }
+            where,
+            limit,
+            offset
         });
     },
 
-    deleteCar: (car_id) => {
+    selectCarById: (carId) => {
+        const CarModel = db.getModel('Car');
+
+        return CarModel.findByPk(carId);
+    },
+
+    deleteCar: (carId) => {
         const CarModel = db.getModel('Car');
         return CarModel.destroy({
             where: {
-                id: car_id
+                id: carId
             }
         });
     }

@@ -46,5 +46,20 @@ module.exports = {
     OK: {
         message: 'OK',
         code: OK
-    }
+    },
+
+    CAR_EXISTS: {
+        message: 'Car already exists',
+        code: BAD_REQUEST
+    },
+
+    CAR_DOESNT_EXIST: {
+        message: 'Car is not present',
+        code: NO_CONTENT
+    },
+
+    CAR_CREATED: {
+        message: 'Car created',
+        code: CREATED
+    },
 };
