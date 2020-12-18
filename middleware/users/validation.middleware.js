@@ -1,4 +1,4 @@
-const { ErrorHandler, errors } = require('../error');
+const { ErrorHandler, errors } = require('../../error');
 
 module.exports = {
     isIdCorrect: (req, res, next) => {

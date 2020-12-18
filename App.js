@@ -21,14 +21,13 @@ app.use('/auth', authRouter);
 
 // eslint-disable-next-line no-unused-vars
 app.use('*', (err, req, res, next) => {
-    res
-        .status(err.code)
-        .json({
-            message: err.message
-        });
+    res.status(err.code).json({
+        message: err.message,
+        ok: false
+    });
 });
 
-app.listen(3000, () => {
+app.listen(5000, () => {
     // eslint-disable-next-line no-console
-    console.log('App listens on port: 3000');
+    console.log('App listens on port: 5000');
 });

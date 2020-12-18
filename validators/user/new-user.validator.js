@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const { EMAIL, PASSWORD } = require('../../config/regex.enum');
+const { regex: { EMAIL, PASSWORD } } = require('../../config');
 const { CURRENT_YEAR } = require('../../constants/constants');
 
 module.exports = Joi.object({

@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { usersController } = require('../controllers');
 const {
     usersMiddleware, validationMiddleware, userValidityMiddleware, userUpdateMiddleware
-} = require('../middleware');
+} = require('../middleware/users');
 
 const usersRouter = Router();
 

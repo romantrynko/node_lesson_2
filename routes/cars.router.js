@@ -5,9 +5,9 @@ const carsRouter = Router();
 
 carsRouter.post('/', carsController.createCar);
 
-carsRouter.get('/', carsController.getAllCars);
+carsRouter.get('/', carsController.findAllCars);
 
-carsRouter.get('/:carId', carsController.getCarById);
+carsRouter.get('/:carId', carsController.findCarById);
 
 carsRouter.put('/:carId', carsController.updateCar);
 
