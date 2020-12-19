@@ -42,8 +42,8 @@ module.exports = {
         const CarModel = db.getModel('Car');
 
         const user = await UserModel.findOne({
-            where: findObj,
-            include: CarModel
+            include: CarModel,
+            where: findObj
         });
 
         return user && user.dataValues;

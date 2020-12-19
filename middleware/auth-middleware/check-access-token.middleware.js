@@ -22,6 +22,10 @@ module.exports = async (req, res, next) => {
             throw new ErrorHandler(errors.NOT_VALID_TOKEN.message, errors.NOT_VALID_TOKEN.code);
         }
 
+        if (userWithToken.id !== req.params.userId) {
+            throw new ErrorHandler(errors.FORBIDDEN.message, errors.FORBIDDEN.code);
+        }
+
         req.user = userWithToken;
 
         next();

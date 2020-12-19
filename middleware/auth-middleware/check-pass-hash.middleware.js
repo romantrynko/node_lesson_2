@@ -5,10 +5,10 @@ const { ErrorHandler, errors: { NOT_VALID_EMAIL_OR_PASSWORD } } = require('../..
 module.exports = async (res, req, next) => {
     try {
         const { password, email } = req.body;
-        const [user] = await userService.selectUserByParams({ email });
+        const user = await userService.selectUserByParams({ email });
 
         if (!user) {
-            throw new ErrorHandler(NOT_VALID_EMAIL_OR_PASSWORD.code);
+            throw new ErrorHandler(NOT_VALID_EMAIL_OR_PASSWORD.message, NOT_VALID_EMAIL_OR_PASSWORD.code);
         }
 
         await compare(password, user.password);
