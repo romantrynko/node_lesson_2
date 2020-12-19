@@ -1,3 +1,4 @@
 module.exports = {
-    passHelper: require('./password.helper')
+    passHelper: require('./password.helper'),
+    tokenizer: require('./tokenizer')
 };

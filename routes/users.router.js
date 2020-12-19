@@ -3,6 +3,7 @@ const { usersController } = require('../controllers');
 const {
     usersMiddleware, validationMiddleware, userValidityMiddleware, userUpdateMiddleware
 } = require('../middleware/users');
+const { checkAccessToken } = require('../middleware/auth-middleware');
 
 const usersRouter = Router();
 
@@ -21,6 +22,7 @@ usersRouter.post(
 
 usersRouter.get(
     '/:userId',
+    checkAccessToken,
     validationMiddleware.isIdCorrect,
     usersMiddleware.checkIsUserRegisteredById,
     usersController.findUserById
@@ -28,6 +30,7 @@ usersRouter.get(
 
 usersRouter.put(
     '/:userId',
+    checkAccessToken,
     userUpdateMiddleware,
     usersMiddleware.checkIsUserRegisteredById,
     validationMiddleware.isIdCorrect,
@@ -37,6 +40,7 @@ usersRouter.put(
 
 usersRouter.delete(
     '/:userId',
+    checkAccessToken,
     validationMiddleware.isIdCorrect,
     usersMiddleware.checkIsUserRegisteredById,
     usersController.deleteUser

@@ -62,4 +62,8 @@ module.exports = {
         message: 'Car created',
         code: CREATED
     },
+    NOT_VALID_TOKEN: {
+        message: 'Not valid token',
+        code: UNATHORIZED
+    }
 };

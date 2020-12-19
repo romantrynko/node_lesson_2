@@ -30,5 +30,12 @@ module.exports = (client, DataTypes) => {
         onDelete: 'cascade'
     });
 
+    const O_Auth = require('./O_Auth')(client, DataTypes);
+
+    User.hasMany(O_Auth, {
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE'
+    });
+
     return User;
 };

@@ -37,14 +37,16 @@ module.exports = {
         return UserModel.findByPk(userId, { include: CarModel });
     },
 
-    selectUserByParams: (findObj) => {
+    selectUserByParams: async (findObj) => {
         const UserModel = db.getModel('User');
         const CarModel = db.getModel('Car');
 
-        return UserModel.findOne({
+        const user = await UserModel.findOne({
             where: findObj,
             include: CarModel
         });
+
+        return user && user.dataValues;
     },
 
     deleteUser: (userId) => {
