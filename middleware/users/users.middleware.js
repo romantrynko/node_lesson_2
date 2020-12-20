@@ -5,7 +5,7 @@ module.exports = {
     checkIsUserRegisteredByEmail: async (req, res, next) => {
         try {
             const { email } = req.body;
-            const [user] = await userService.selectAllUsers({ email }, 1);
+            const user = await userService.selectAllUsers({ email }, 1);
 
             if (user) {
                 throw new ErrorHandler(errors.USER_EXISTS.message, errors.USER_EXISTS.code);

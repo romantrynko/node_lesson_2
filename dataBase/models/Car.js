@@ -1,3 +1,5 @@
+const { CARS_TABLE } = require('../../constants/constants');
+
 module.exports = (client, DataTypes) => {
     const Car = client.define('Car', {
         id: {
@@ -24,7 +26,7 @@ module.exports = (client, DataTypes) => {
             allowNull: false
         }
     }, {
-        tableName: 'cars',
+        tableName: CARS_TABLE,
         timestamps: false
     });
 

@@ -1,10 +1,14 @@
 /* eslint-disable linebreak-style */
+const {
+    USERNAME, PASSWORD, DATABASE, HOST, DIALECT
+} = require('./config');
+
 module.exports = {
     development: {
-        username: 'root',
-        password: 'root',
-        database: 'usersdb',
-        host: '127.0.0.1',
-        dialect: 'mysql'
+        username: USERNAME,
+        password: PASSWORD,
+        database: DATABASE,
+        host: HOST,
+        dialect: DIALECT
     }
 };

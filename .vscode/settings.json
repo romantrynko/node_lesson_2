@@ -8,5 +8,6 @@
     ],
     "eslint.workingDirectories": [
     
-    ]
+    ],
+    "git.ignoreLimitWarning": true
 }

@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { ErrorHandler, errors } = require('../../error');
 const { o_authService } = require('../../services');
+const { ACCESS_TOKEN } = require('../../config/config');
 
 module.exports = async (req, res, next) => {
     try {
@@ -10,7 +11,7 @@ module.exports = async (req, res, next) => {
             throw new ErrorHandler(errors.NOT_VALID_TOKEN.message, errors.NOT_VALID_TOKEN.code);
         }
 
-        jwt.verify(token, 'MEGA_KEY', (err) => {
+        jwt.verify(token, ACCESS_TOKEN, (err) => {
             if (err) {
                 throw new ErrorHandler(errors.NOT_VALID_TOKEN.message, errors.NOT_VALID_TOKEN.code);
             }

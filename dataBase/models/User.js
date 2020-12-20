@@ -1,3 +1,5 @@
+const { USERS_TABLE } = require('../../constants/constants');
+
 module.exports = (client, DataTypes) => {
     const User = client.define('User', {
         id: {
@@ -19,7 +21,7 @@ module.exports = (client, DataTypes) => {
             allowNull: false
         }
     }, {
-        tableName: 'users',
+        tableName: USERS_TABLE,
         timestamps: false
     });
 

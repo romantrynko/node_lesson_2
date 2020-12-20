@@ -2,10 +2,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable strict */
 /* eslint-disable lines-around-directive */
+const { O_AUTH_TABLE } = require('../../constants/constants');
 
 module.exports = {
     up: async (queryInterface, Sequelize, client) => {
-        await queryInterface.createTable('o_auth', {
+        await queryInterface.createTable(O_AUTH_TABLE, {
             id: {
                 type: Sequelize.DataTypes.INTEGER,
                 primaryKey: true,
@@ -25,7 +26,7 @@ module.exports = {
                 allowNull: false,
                 foreignKey: true,
                 reference: {
-                    model: 'users',
+                    model: 'user',
                     key: 'id'
                 }
             },
@@ -37,6 +38,6 @@ module.exports = {
     },
 
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('o_auth');
+        await queryInterface.dropTable(O_AUTH_TABLE);
     }
 };

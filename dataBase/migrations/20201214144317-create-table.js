@@ -1,9 +1,11 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable strict */
 /* eslint-disable lines-around-directive */
+const { CARS_TABLE } = require('../../constants/constants');
+
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('cars', {
+        await queryInterface.createTable(CARS_TABLE, {
             id: {
                 type: Sequelize.DataTypes.INTEGER,
                 autoIncrement: true,
@@ -26,7 +28,7 @@ module.exports = {
                 type: Sequelize.DataTypes.INTEGER,
                 allowNull: false,
                 foreignKey: true,
-                references: {
+                reference: {
                     model: 'user',
                     key: 'id'
                 }
@@ -36,6 +38,6 @@ module.exports = {
 
     // eslint-disable-next-line no-unused-vars
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('cars');
+        await queryInterface.dropTable(CARS_TABLE);
     }
 };

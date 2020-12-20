@@ -3,14 +3,29 @@ const { carsController } = require('../controllers');
 
 const carsRouter = Router();
 
-carsRouter.post('/', carsController.createCar);
+carsRouter.post(
+    '/',
+    carsController.createCar
+);
 
-carsRouter.get('/', carsController.findAllCars);
+carsRouter.get(
+    '/',
+    carsController.findAllCars
+);
 
-carsRouter.get('/:carId', carsController.findCarById);
+carsRouter.get(
+    '/:carId',
+    carsController.findCarById
+);
 
-carsRouter.put('/:carId', carsController.updateCar);
+carsRouter.put(
+    '/:carId',
+    carsController.updateCar
+);
 
-carsRouter.delete('/:carId', carsController.deleteCar);
+carsRouter.delete(
+    '/:carId',
+    carsController.deleteCar
+);
 
 module.exports = carsRouter;

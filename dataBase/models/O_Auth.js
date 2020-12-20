@@ -1,3 +1,5 @@
+const { O_AUTH_TABLE } = require('../../constants/constants');
+
 module.exports = (client, DataTypes) => {
     const O_Auth = client.define('O_Auth', {
         id: {
@@ -28,7 +30,7 @@ module.exports = (client, DataTypes) => {
             default: client.fn('NOW')
         }
     }, {
-        tableName: 'o_auth',
+        tableName: O_AUTH_TABLE,
         timestamps: false
     });
 
