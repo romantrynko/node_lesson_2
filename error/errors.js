@@ -69,5 +69,8 @@ module.exports = {
     FORBIDDEN: {
         message: 'Permission denied',
         code: FORBIDDEN
+    },
+    WRONG_TEMPLATE_NAME: {
+        message: 'Wrong template name'
     }
 };
