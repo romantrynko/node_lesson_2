@@ -14,7 +14,7 @@ class EmailService {
     sendMail(userMail) {
         try {
             return transporter.sendMail({
-                from: 'Theme',
+                from: 'noreply',
                 to: userMail,
                 subject: 'subject',
                 html: ''
