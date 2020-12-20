@@ -2,7 +2,7 @@
 require('dotenv').config();
 
 const {
-    USERNAME, PASSWORD, HOST, DIALECT
+    USERNAME, PASSWORD, HOST
 } = require('./config');
 const { DATABASE_NAME } = require('../constants/constants');
 
@@ -12,6 +12,6 @@ module.exports = {
         password: PASSWORD,
         database: DATABASE_NAME,
         host: HOST,
-        dialect: DIALECT
+        dialect: 'mysql'
     }
 };

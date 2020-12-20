@@ -5,12 +5,13 @@ const EmailTemplates = require('email-templates');
 const path = require('path');
 const templatesInfo = require('../email-templates');
 const { ErrorHandler, errors: { WRONG_TEMPLATE_NAME } } = require('../error');
+const { ROOT_EMAIL, ROOT_EMAIL_PASS, ROOT_EMAIL_SERVICE } = require('../config/config');
 
 const transporter = mailer.createTransport({
-    service: 'gmail',
+    service: ROOT_EMAIL_SERVICE,
     auth: {
-        pass: 'password',
-        user: 'romantrynko@gmail.com'
+        pass: ROOT_EMAIL_PASS,
+        user: ROOT_EMAIL
     }
 });
 
@@ -41,4 +42,6 @@ const sendMail = async (userMail, action, context) => {
     }
 };
 
-module.exports = sendMail;
+module.exports = {
+    sendMail
+};

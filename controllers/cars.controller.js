@@ -4,9 +4,9 @@ const { errors } = require('../error');
 module.exports = {
     createCar: async (req, res, next) => {
         try {
-            const { car } = req.body;
+            Object.assign(req.body);
 
-            await carsService.createCar(car);
+            await carsService.createCar(req.body);
 
             res.status(errors.CAR_CREATED.code);
         } catch (e) {

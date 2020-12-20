@@ -1,14 +1,20 @@
-const { userService } = require('../services');
+const { emailService, userService } = require('../services');
 const { errors } = require('../error');
 const { passHelper: { hash } } = require('../utils');
+const { WELCOME } = require('../constants/email-actions.enum');
 
 module.exports = {
 
     createUser: async (req, res, next) => {
         try {
-            const password = await hash(req.body.password);
+            const { email, name, password } = req.body;
+            const hashedPassword = await hash(password);
 
-            await userService.insertUser({ ...req.body, password });
+            Object.assign(req.body, { password: hashedPassword });
+
+            await userService.insertUser(req.body);
+
+            await emailService.sendMail(email, WELCOME, { userName: name });
 
             res.sendStatus(errors.USER_CREATED.code);
         } catch (e) {
