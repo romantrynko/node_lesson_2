@@ -1,13 +1,16 @@
 /* eslint-disable linebreak-style */
+require('dotenv').config();
+
 const {
-    USERNAME, PASSWORD, DATABASE, HOST, DIALECT
+    USERNAME, PASSWORD, HOST, DIALECT
 } = require('./config');
+const { DATABASE_NAME } = require('../constants/constants');
 
 module.exports = {
     development: {
         username: USERNAME,
         password: PASSWORD,
-        database: DATABASE,
+        database: DATABASE_NAME,
         host: HOST,
         dialect: DIALECT
     }
