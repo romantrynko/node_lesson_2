@@ -4,11 +4,9 @@ const { checkPassHashMid, emailPassMid } = require('../middleware/auth-middlewar
 
 const authRouter = Router();
 
-authRouter.post(
-    '/',
+authRouter.post('/',
     emailPassMid,
     checkPassHashMid,
-    authController.loginUser
-);
+    authController.loginUser);
 
 module.exports = authRouter;

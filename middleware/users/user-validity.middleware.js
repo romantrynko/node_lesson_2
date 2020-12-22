@@ -4,6 +4,8 @@ const { newUserValidator } = require('../../validators/user');
 
 module.exports = (req, res, next) => {
     try {
+        console.log(req.files);
+
         const { error } = newUserValidator.validate(req.body);
 
         if (error) {

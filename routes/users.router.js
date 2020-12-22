@@ -4,46 +4,39 @@ const {
     usersMiddleware, validationMiddleware, userValidityMiddleware, userUpdateMiddleware
 } = require('../middleware/users');
 const { checkAccessToken } = require('../middleware/auth-middleware');
+const { fileMiddleware, avatarMiddleware } = require('../middleware/file-middleware');
 
 const usersRouter = Router();
 
-usersRouter.get(
-    '/',
-    usersController.findAllUsers
-);
+usersRouter.get('/',
+    usersController.findAllUsers);
 
-usersRouter.post(
-    '/',
+usersRouter.post('/',
     userValidityMiddleware,
     usersMiddleware.checkIsUserRegisteredByEmail,
     validationMiddleware.isUserCreateCorrect,
-    usersController.createUser
-);
+    fileMiddleware,
+    avatarMiddleware,
+    usersController.createUser);
 
-usersRouter.get(
-    '/:userId',
+usersRouter.get('/:userId',
     checkAccessToken,
     validationMiddleware.isIdCorrect,
     usersMiddleware.checkIsUserRegisteredById,
-    usersController.findUserById
-);
+    usersController.findUserById);
 
-usersRouter.put(
-    '/:userId',
+usersRouter.put('/:userId',
     checkAccessToken,
     userUpdateMiddleware,
     usersMiddleware.checkIsUserRegisteredById,
     validationMiddleware.isIdCorrect,
     validationMiddleware.isUserUpdateCorrect,
-    usersController.updateUser
-);
+    usersController.updateUser);
 
-usersRouter.delete(
-    '/:userId',
+usersRouter.delete('/:userId',
     checkAccessToken,
     validationMiddleware.isIdCorrect,
     usersMiddleware.checkIsUserRegisteredById,
-    usersController.deleteUser
-);
+    usersController.deleteUser);
 
 module.exports = usersRouter;

@@ -6,6 +6,7 @@
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/email-templates": "^8.0.0",
+    "@types/express-fileupload": "^1.1.6",
     "@types/joi": "^14.3.4",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/pug": "^2.0.4",
@@ -16,6 +17,7 @@
     "eslint": "^7.14.0",
     "eslint-config-node": "^4.1.0",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
     "express-handlebars": "^5.2.0",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",

@@ -62,15 +62,33 @@ module.exports = {
         message: 'Car created',
         code: CREATED
     },
+
     NOT_VALID_TOKEN: {
         message: 'Not valid token',
         code: UNATHORIZED
     },
+
     FORBIDDEN: {
         message: 'Permission denied',
         code: FORBIDDEN
     },
+
     WRONG_TEMPLATE_NAME: {
         message: 'Wrong template name'
+    },
+
+    TOO_BIG_FILE: {
+        message: 'Too big file',
+        code: BAD_REQUEST
+    },
+
+    WRONG_FILE_TYPE: {
+        message: 'Wrong file type',
+        code: BAD_REQUEST
+    },
+
+    ONLY_ONE_PHOTO: {
+        message: 'You can use only one picture for your avatar',
+        code: BAD_REQUEST
     }
 };
